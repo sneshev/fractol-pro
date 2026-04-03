@@ -3,7 +3,7 @@
 // See README in the root project for more information.
 // -----------------------------------------------------------------------------
 
-#include "fract_main.hpp"
+#include "fract.hpp"
 
 static mlx_image_t* image;
 

@@ -1,0 +1,31 @@
+# Suppress X11 "still reachable" allocations
+{
+   X11 still reachable
+   Memcheck:Leak
+   fun:_XlcCreateLC
+   fun:_XOpenLC
+   fun:_XrmInitParseInfo
+}
+
+{
+   X11 still reachable
+   Memcheck:Leak
+   fun:_XlcCreateDefaultCharSet
+   fun:_XlcAddCT
+   fun:_XlcInitCTInfo
+}
+
+# Suppress GLFW allocations
+{
+   GLFW still reachable
+   Memcheck:Leak
+   fun:glfwInit
+   fun:glfwTerminate
+}
+
+# Suppress LLVM static allocations
+{
+   LLVM still reachable
+   Memcheck:Leak
+   fun:llvm::ManagedStaticBase::RegisterManagedStatic
+}
