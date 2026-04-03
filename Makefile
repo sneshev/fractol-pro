@@ -1,5 +1,5 @@
 NAME = fractol
-CC = cc 
+CC = c++
 CFLAGS = -g -Wall -Wextra -Werror 
 
 MLX = https://github.com/codam-coding-college/MLX42.git
@@ -22,7 +22,7 @@ libft:
 	@[ -d "$(LIBFT_PATH)" ] || git clone $(LIBFT) $(LIBFT_PATH);
 	@[ -f "$(LIBFT_PATH)/libft.a" ] || (cd $(LIBFT_PATH) && make)
 
-SRCS = $(wildcard src/*.c)
+SRCS = $(wildcard src/*.c) $(wildcard src/*.cpp)
 OBJS_DIR = obj
 OBJS = $(SRCS:src/%.c=$(OBJS_DIR)/%.o)
 OBJS := $(OBJS:ft_printf/%.c=$(OBJS_DIR)/%.o)
