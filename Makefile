@@ -1,13 +1,15 @@
 NAME = fractol
-CC = c++
-CFLAGS = -g -Wall -Wextra -Werror 
+CC = gcc -g -Wall -Wextra -Werror 
+CPP = c++ -g -Wall -Wextra -Werror 
 
 MLX = https://github.com/codam-coding-college/MLX42.git
 MLX_PATH = MLX42
 LIBFT = https://github.com/sneshev/libft_42.git
 LIBFT_PATH = libft
 
-LIBS = -Iinclude -L$(LIBFT_PATH) -L./MLX42/build -lmlx42 -lglfw -lGL -lm -ldl -lpthread
+LIBS = -Iincludes -Iincludes/classes -L$(LIBFT_PATH) -L./MLX42/build -lmlx42 -lglfw -lGL -lm -ldl -lpthread
+
+
 
 all:  libft MLX $(NAME)
 
@@ -22,19 +24,22 @@ libft:
 	@[ -d "$(LIBFT_PATH)" ] || git clone $(LIBFT) $(LIBFT_PATH);
 	@[ -f "$(LIBFT_PATH)/libft.a" ] || (cd $(LIBFT_PATH) && make)
 
-SRCS = $(wildcard src/*.c) $(wildcard src/*.cpp)
+# SRCS = $(wildcard src/*.c) $(wildcard src/*.cpp)
+SRCS = $(shell find src -name '*.c' -o -name '*.cpp')
 OBJS_DIR = obj
-OBJS = $(SRCS:src/%.c=$(OBJS_DIR)/%.o)
-OBJS := $(OBJS:ft_printf/%.c=$(OBJS_DIR)/%.o)
+OBJS  = $(SRCS:src/%.c=$(OBJS_DIR)/%.o)
+OBJS := $(OBJS:src/%.cpp=$(OBJS_DIR)/%.o)
 
-$(OBJS_DIR):
-	@mkdir -p $(OBJS_DIR)
+$(OBJS_DIR)/%.o: src/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(LIBS) -c $< -o $@
 
-$(OBJS_DIR)/%.o: src/%.c | $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
+$(OBJS_DIR)/%.o: src/%.cpp
+	@mkdir -p $(dir $@)
+	$(CPP) $(LIBS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) $(LIBS) -o $(NAME)
+	$(CPP) $(OBJS) $(LIBS) -o $(NAME)
 
 clean:
 	rm -rf $(OBJS_DIR) $(NAME)
