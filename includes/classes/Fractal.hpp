@@ -20,6 +20,7 @@ class Fractal {
 		Fractal(Mlx &inMlx, t_input &input);
 		~Fractal();
 
+		void info();
 		void mlxLoop();
 		void mlxTerminate();
 		// void draw();

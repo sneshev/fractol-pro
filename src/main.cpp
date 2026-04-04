@@ -11,6 +11,8 @@ int main(int argc, char *argv[]) {
 	Mlx mlx = initializeMlx();
 	Fractal fract(mlx, input);
 
+
+	fract.info();
 	//...
 	//...
 
