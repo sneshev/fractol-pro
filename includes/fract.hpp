@@ -4,13 +4,13 @@
 #include "../MLX42/include/MLX42/MLX42.h"
 #include "Fixed.hpp"
 #include "Fractal.hpp"
+#include "Mandelbrot.hpp"
 #include "macros.hpp"
 #include "typedefs.hpp"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
 
 // mlx
 Mlx initializeMlx();

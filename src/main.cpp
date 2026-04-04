@@ -3,14 +3,10 @@
 
 int main(int argc, char *argv[]) {
 	t_input input;
-	if (!isValidInput(argc, argv, input)) {
-		cout << "bad input" << endl;
-		return (1);
-	}
+	if (!isValidInput(argc, argv, input)) { return (1); }
 
 	Mlx mlx = initializeMlx();
-	Fractal fract(mlx, input);
-
+	Mandelbrot fract(mlx, input);
 
 	fract.info();
 	//...

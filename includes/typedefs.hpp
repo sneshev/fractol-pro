@@ -1,12 +1,21 @@
 #ifndef FRACT_TYPEDEFS_HPP
 #define FRACT_TYPEDEFS_HPP
 
+#include <array>
 #include <iostream>
 #include <algorithm>
 #include <vector>
 #include <string>
 
+#define X 0
+#define Y 1
+
+#define MIN 0
+#define MAX 1
+
+
 #define str std::string
+#define arr std::array
 using std::cout;
 using std::cin;
 using std::endl;

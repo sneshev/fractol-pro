@@ -13,8 +13,8 @@ static bool areValidValues(str cRealString, str cImagString, t_input &input) {
 	float cReal;
 	float cImag;
 	try {
-			cReal = std::stof(cRealString);
-			cImag = std::stof(cImagString);
+		cReal = std::stof(cRealString);
+		cImag = std::stof(cImagString);
 	} catch (const std::exception&) {
 		return (false);
 	}

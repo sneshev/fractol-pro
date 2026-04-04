@@ -6,15 +6,15 @@
 #include "typedefs.hpp"
 
 class Fractal {
-	private:
+	protected:
 		Mlx&			_mlx;
 		e_fract_type	_type;
 
-		Fixed	_cReal;
-		Fixed	_cImag;
-		Fixed	_minRange[2];
-		Fixed	_maxRange[2];
-		int		_maxIterations;
+		Fixed			_cReal;
+		Fixed			_cImag;
+		arr<Fixed, 2> 	_xRange;
+		arr<Fixed, 2> 	_yRange;
+		unsigned int	_maxIterations;
 
 	public:
 		Fractal(Mlx &inMlx, t_input &input);
@@ -23,7 +23,8 @@ class Fractal {
 		void info();
 		void mlxLoop();
 		void mlxTerminate();
-		// void draw();
+
+		virtual void draw() = 0;
 		// void zoom();
 		// void move();
 		// ...

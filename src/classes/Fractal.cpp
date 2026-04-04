@@ -1,10 +1,14 @@
 #include "Fractal.hpp"
+#include "macros.hpp"
 
 Fractal::Fractal(Mlx &inMlx, t_input &input) 
 	:	_mlx(inMlx),
 		_type(input.type),
 		_cReal(input.args[0]),
-		_cImag(input.args[1])
+		_cImag(input.args[1]),
+		_xRange({Fixed(MIN_REAL), Fixed(MAX_REAL)}),
+		_yRange({Fixed(MIN_IMAG), Fixed(MAX_IMAG)}),
+		_maxIterations(MAX_ITERATIONS)
 {
 	std::cout << GREEN << "Fractal constructor called" << RESET << std::endl;
 }
@@ -35,4 +39,9 @@ void Fractal::info() {
 	}
 	cout << "c real: " <<  _cReal << endl;
 	cout << "c imag: " <<  _cImag << endl;
+	cout << "minRangeX: " << _xRange[MIN] << endl;
+	cout << "minRangeX: " << _xRange[MAX] << endl;
+	cout << "maxRangeX: " << _yRange[MIN] << endl;
+	cout << "maxRangeX: " << _yRange[MAX] << endl;
+	cout << "maxIterations: " << _maxIterations<< endl;
 }
