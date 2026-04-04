@@ -8,16 +8,15 @@
 class Fractal {
 	private:
 		Mlx&			_mlx;
+		e_fract_type	_type;
 
+		Fixed	_cReal;
+		Fixed	_cImag;
 		Fixed	_minRange[2];
 		Fixed	_maxRange[2];
 		int		_maxIterations;
 
 	public:
-		e_fract_type	_type;
-		Fixed	_cReal;
-
-		Fixed	_cImag;
 		Fractal(Mlx &inMlx, t_input &input);
 		~Fractal();
 
