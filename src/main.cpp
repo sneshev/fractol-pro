@@ -9,10 +9,6 @@ int main(int argc, char *argv[]) {
 	Mlx mlx = initializeMlx();
 	Fractal fract(mlx, input);
 
-	cout << fract._cReal << endl;
-	cout << fract._cImag << endl;
-	cout << fract._type << endl;
-
 	//...
 	//...
 
