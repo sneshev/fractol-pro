@@ -3,35 +3,27 @@
 
 #include "Fixed.hpp"
 #include "Mlx.hpp"
-
-
-typedef struct s_data
-{
-	mlx_t		*_mlx;
-	mlx_image_t	*_img;
-
-	int			_color_set;
-	int			_type;
-	double		_c[2];
-	double		_range_min[2];
-	double		_range_max[2];
-	int			_max_iterations;
-}	t_data;
+#include "typedefs.hpp"
 
 class Fractal {
 	private:
+		Mlx&			_mlx;
 
-		Fixed	_c[2];
-		Fixed	_range_min[2];
-		Fixed	_range_max[2];
-		int		_max_iterations;
+		Fixed	_minRange[2];
+		Fixed	_maxRange[2];
+		int		_maxIterations;
 
 	public:
-		Mlx &mlx;
+		e_fract_type	_type;
+		Fixed	_cReal;
 
-		Fractal(Mlx &inMlx);
+		Fixed	_cImag;
+		Fractal(Mlx &inMlx, t_input &input);
 		~Fractal();
 
+		void mlxLoop();
+		void mlxTerminate();
+		// void draw();
 		// void zoom();
 		// void move();
 		// ...

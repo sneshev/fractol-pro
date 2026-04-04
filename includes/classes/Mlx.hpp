@@ -12,7 +12,6 @@ class Mlx {
 		Mlx(mlx_t& inMlx, mlx_image_t& inImg);
 		~Mlx();
 
-		void draw();
 		void loop();
 		void terminate();
 

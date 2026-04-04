@@ -1,42 +1,24 @@
 #include "fract.hpp"
 
-Mlx initializeMlx() {
-	mlx_t*			mlx;
-	mlx_image_t*	img;
 
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true))) {
-		puts(mlx_strerror(mlx_errno));
-		exit(EXIT_FAILURE);
-	}
-	if (!(img = mlx_new_image(mlx, WIDTH, HEIGHT))) {
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		exit(EXIT_FAILURE);
-	}
-	// if (mlx_image_to_window(mlx, img, 0, 0) == -1)
-	// {
-	// 	mlx_close_window(mlx);
-	// 	puts(mlx_strerror(mlx_errno));
-	// 	exit(EXIT_FAILURE);
-	// }
-
-	// mlx_loop_hook(mlx, ft_randomize, mlx);
-	// mlx_loop_hook(mlx, ft_hook, mlx);
-	return (Mlx(*mlx, *img));
-}
-
-
-int main() {
+int main(int argc, char *argv[]) {
+	t_input input;
+	if (!isValidInput(argc, argv, input)) {
+		cout << "bad input" << endl;
+	} else { cout << "good input" << endl; }
 	Mlx mlx = initializeMlx();
+	Fractal fract(mlx, input);
 
-	Fractal fract(mlx);
+	cout << fract._cReal << endl;
+	cout << fract._cImag << endl;
+	cout << fract._type << endl;
 
 	//...
 	//...
 
 
 
-	fract.mlx.loop();
-	fract.mlx.terminate(); //dunno if i have to destroy image
+	fract.mlxLoop();
+	fract.mlxTerminate(); //dunno if i have to destroy image
 	return (EXIT_SUCCESS);
 }
