@@ -2,20 +2,10 @@
 
 Fractal::Fractal(Mlx &inMlx, t_input &input) 
 	:	_mlx(inMlx),
-		_type(input.type)
+		_type(input.type),
+		_cReal(input.args[0]),
+		_cImag(input.args[1])
 {
-	if (input.type == FRCT_JULIA) {
-		if (input.args.size() == 2) {
-			_cReal = Fixed(input.args[0]);
-			_cImag = Fixed(input.args[1]);
-		} else {
-			_cReal = Fixed(-0.7f);
-			_cImag = Fixed(0.27015f);
-		}
-	} else {
-		_cReal = Fixed(0);
-		_cImag = Fixed(0);
-	}
 	std::cout << GREEN << "Fractal constructor called" << RESET << std::endl;
 }
 

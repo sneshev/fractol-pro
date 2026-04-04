@@ -5,6 +5,7 @@ int main(int argc, char *argv[]) {
 	t_input input;
 	if (!isValidInput(argc, argv, input)) {
 		cout << "bad input" << endl;
+		return (1);
 	}
 
 	Mlx mlx = initializeMlx();

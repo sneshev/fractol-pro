@@ -23,15 +23,28 @@ static bool areValidValues(str cRealString, str cImagString, t_input &input) {
 	return (true);
 }
 
+static void fillValues(t_input &input) {
+	if (input.type == FRCT_JULIA) {
+		input.args.push_back(-0.7f);
+		input.args.push_back(0.27015f);
+	} else {
+		input.args.push_back(0);
+		input.args.push_back(0);
+	}
+}
+
 bool isValidInput(int argc, char *argv[], t_input &input) {
 	if (argc != 2 && argc != 4) {
 		return (false);
 	}
 	if (!isValidType(argv[1], input))
 		return (false);
+
 	if (argc == 4) {
 		if (!areValidValues(argv[2], argv[3], input))
 			return (false);
+	} else {
+		fillValues(input);
 	}
 	return (true);
 }
