@@ -12,9 +12,15 @@ Mlx::~Mlx() {
 
 void Mlx::loop() {
 	mlx_loop(&_mlx);
-
 }
 
 void Mlx::terminate() {
 	mlx_terminate(&_mlx);
+}
+
+mlx_t* Mlx::getMlx() {
+	return (&_mlx);
+}
+mlx_image_t* Mlx::getImg() {
+	return (&_img);
 }

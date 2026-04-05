@@ -2,6 +2,7 @@
 #define FRACT_MANDELBROT_HPP
 
 #include "Fractal.hpp"
+#include "macros.hpp"
 
 class Mandelbrot : public Fractal {
 	public:

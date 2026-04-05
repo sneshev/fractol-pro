@@ -16,6 +16,7 @@ class Fractal {
 		arr<Fixed, 2> 	_yRange;
 		unsigned int	_maxIterations;
 
+		virtual unsigned int calcIterations() = 0;
 	public:
 		Fractal(Mlx &inMlx, t_input &input);
 		~Fractal();
@@ -29,6 +30,13 @@ class Fractal {
 		// void move();
 		// ...
 
+		mlx_t*			getMlx();
+		mlx_image_t*	getImg();
+
+		Fixed getCReal();
+		Fixed getCImag();
+		Fixed getXRange();
+		Fixed getYRange();
 };
 
 #endif

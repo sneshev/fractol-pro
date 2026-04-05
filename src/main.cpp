@@ -9,10 +9,7 @@ int main(int argc, char *argv[]) {
 	Mandelbrot fract(mlx, input);
 
 	fract.info();
-	//...
-	//...
-
-
+	fract.draw();
 
 	fract.mlxLoop();
 	fract.mlxTerminate(); //dunno if i have to destroy image

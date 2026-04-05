@@ -43,6 +43,11 @@ class Fixed {
 		Fixed	operator*(const Fixed &other) const;
 		Fixed	operator/(const Fixed &other) const;
 
+		// Fixed	operator+(const int) const;
+		// Fixed	operator-(const int) const;
+		// Fixed	operator*(const int) const;
+		// Fixed	operator/(const int) const;
+
 		Fixed	operator++(int);
 		Fixed&	operator++(void);
 		Fixed	operator--(int);
