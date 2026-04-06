@@ -72,12 +72,41 @@ Fixed Fixed::operator *	(const Fixed &other) const {
 
 Fixed Fixed::operator /	(const Fixed &other) const {
 	Fixed f;
-	// if (other.getRawBits() == 0)
-		// throw (std::runtime_error("Division by zero"));
+	if (other.getRawBits() == 0)
+		throw (std::runtime_error("Division by zero"));
 	long rawtotal = ((long)_value << _fractionalBitAmount) / other.getRawBits();
 	f.setRawBits(rawtotal);
 	return (f);
 }
+
+Fixed Fixed::operator +	(const int i) const {
+	Fixed f;
+	long rawtotal = (long)_value + (i << _fractionalBitAmount);
+	f.setRawBits(rawtotal);
+	return (f);
+}
+
+Fixed Fixed::operator -	(const int i) const {
+	Fixed f;
+	long rawtotal = (long)_value - (i << _fractionalBitAmount);
+	f.setRawBits(rawtotal);
+	return (f);
+}
+
+Fixed Fixed::operator *	(const int i) const {
+	Fixed f;
+	long rawtotal = (long)_value * i;
+	f.setRawBits(rawtotal);
+	return (f);
+}
+
+Fixed Fixed::operator /	(const int i) const {
+	Fixed f;
+	long rawtotal = (long)_value / i;
+	f.setRawBits(rawtotal);
+	return (f);
+}
+
 
 Fixed Fixed::operator++	(int) {
 	Fixed	old = (*this);

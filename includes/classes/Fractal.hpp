@@ -16,7 +16,6 @@ class Fractal {
 		arr<Fixed, 2> 	_yRange;
 		unsigned int	_maxIterations;
 
-		virtual unsigned int calcIterations() = 0;
 	public:
 		Fractal(Mlx &inMlx, t_input &input);
 		~Fractal();
