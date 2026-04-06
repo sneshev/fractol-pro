@@ -5,11 +5,11 @@
 
 class Mlx {
 	private:
-		mlx_t&			_mlx;
-		mlx_image_t&	_img;
+		mlx_t*			_mlx;
+		mlx_image_t*	_img;
 
 	public:
-		Mlx(mlx_t& inMlx, mlx_image_t& inImg);
+		Mlx();
 		~Mlx();
 
 		void loop();

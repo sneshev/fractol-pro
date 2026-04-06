@@ -5,7 +5,7 @@ int main(int argc, char *argv[]) {
 	t_input input;
 	if (!isValidInput(argc, argv, input)) { return (1); }
 
-	Mlx mlx = initializeMlx();
+	Mlx mlx;
 	Mandelbrot fract(mlx, input);
 
 	fract.info();

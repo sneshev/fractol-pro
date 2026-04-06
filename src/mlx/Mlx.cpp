@@ -1,22 +1,50 @@
+#include "fract.hpp"
 #include "Mlx.hpp"
 
-Mlx::Mlx(mlx_t &inMlx, mlx_image_t &inImg) 
-	: _mlx(inMlx), _img(inImg)
-{
+Mlx::Mlx() {
+	mlx_t* 			mlx;
+	mlx_image_t*	img;
 
+	// Gotta error check this stuff
+	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
+	{
+		puts(mlx_strerror(mlx_errno));
+		exit(EXIT_FAILURE);
+	}
+	if (!(img = mlx_new_image(mlx, WIDTH, HEIGHT)))
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		exit(EXIT_FAILURE);
+	}
+	if (mlx_image_to_window(mlx, img, 0, 0) == -1)
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		exit(EXIT_FAILURE);
+	}
+	
+	// mlx_loop_hook(mlx, drawy, mlx);
+	// mlx_loop_hook(mlx, ft_hook, mlx);
+
+	// mlx_loop(mlx);
+	// mlx_terminate(mlx);
+	// exit(EXIT_SUCCESS);
+	_mlx = mlx;
+	_img = img;
 }
 
 Mlx::~Mlx() {
-	mlx_terminate(&_mlx);
+	mlx_terminate(_mlx);
 }
 
 void Mlx::loop() {
-	mlx_loop(&_mlx);
+	mlx_loop(_mlx);
 }
 
 mlx_t* Mlx::getMlx() {
-	return (&_mlx);
+	return (_mlx);
 }
 mlx_image_t* Mlx::getImg() {
-	return (&_img);
+	return (_img);
 }
