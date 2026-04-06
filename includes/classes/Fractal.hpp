@@ -12,8 +12,12 @@ class Fractal {
 
 		Fixed			_cReal;
 		Fixed			_cImag;
-		arr<Fixed, 2> 	_xRange;
-		arr<Fixed, 2> 	_yRange;
+
+		Fixed			_xMin;
+		Fixed			_xMax;
+		Fixed			_yMin;
+		Fixed			_yMax;
+
 		unsigned int	_maxIterations;
 
 	public:
@@ -33,8 +37,22 @@ class Fractal {
 
 		Fixed getCReal();
 		Fixed getCImag();
-		Fixed getXRange();
-		Fixed getYRange();
+
+		Fixed getXMin() const;
+		Fixed getXMax() const;
+		Fixed getXRange() const;
+		Fixed getXCenter() const;
+
+		Fixed getYMin() const;
+		Fixed getYMax() const;
+		Fixed getYCenter() const;
+		Fixed getYRange() const;
+
+		void setXMin(const Fixed &inX);
+		void setXMax(const Fixed &inX);
+		void setYMin(const Fixed &inY);
+		void setYMax(const Fixed &inY);
+
 };
 
 int getColor(unsigned int iterations, unsigned int max_iterations);
