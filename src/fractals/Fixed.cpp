@@ -176,6 +176,22 @@ bool Fixed::isOutOfRadius(const int a, const int b) {
 }
 
 /*
+
+
+	THIS BENEATH IS ALL TOTALLY WRONG SMH...
+	THE WHOLE REASON TO SQUARE IS TO GET RID OF NEGATIVE NUMBERS.
+	WHAT a << 1 DOES IS MULTIPLY BY 2, NOT SQUARE... SO EVERYTHING 
+	FROM THE VERY FIRST EQUASION IS WRONG.....
+	but I do wonder, why does it work? because its still the mandelbrot 
+	set if i do this *wrong* calculation. Why? CAN IT be optimized?
+
+
+
+
+
+
+
+
 	Im confident it can be optimized but its complicated.
 
 	A big problem are negative numbers. That's precisely the reason
