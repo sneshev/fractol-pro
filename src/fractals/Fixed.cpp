@@ -171,5 +171,41 @@ Fixed Fixed::getDoubledValue() const {
 }
 
 bool Fixed::isOutOfRadius(const int a, const int b) {
-	return ((((a << 1) + (b << 1)) >> (_fractionalBitAmount + 2)) < 1) ? false : true; 
+	return (((a + b) >> (_fractionalBitAmount + 1)) < 1) ? false : true; 
+	return (((a + b) >> (_fractionalBitAmount + 1)) > 0) ? true : false; 
 }
+
+/*
+	Im confident it can be optimized but its complicated.
+
+	A big problem are negative numbers. That's precisely the reason
+	that x and y were being squared to begin with. But i dont think
+	they actually need to be squared, bitwise will probably do the
+	trick. 
+
+	on this line:
+		return ((((a << 1) + (b << 1)) >> (_fractionalBitAmount)) < 4) ? false : true;
+	we can see the original a*a+b*b<4 condition:
+		a << 1 is a squared, therefore a << 1 == a*a
+	then we shift the value to the right by >> _fractionalBitAmount
+	because we want to get the actual number rather than rawbits.
+	then we see if its < 4 like in the original equasion
+
+	on this line:
+		return ((((a << 1) + (b << 1)) >> (_fractionalBitAmount + 2)) < 1) ? false : true;
+	its the same equasion but instead of doing value <? 4 we shift both value
+	and 4 to the left by 2 bits. 4 << 2 is 1, that is why i equate it to 1.
+	and i also put the value << 2 at the same time that i shift the fractional bits
+	so its the same equasion only everything is shifted to the right by 2 (>> 2)
+
+	the last line:
+		return (((a + b) >> (_fractionalBitAmount + 1)) < 1) ? false : true; 
+	is the same equasion only i dont do the unnecessary first shift to the left
+	for a and b, and therefore i also shift the right side once less. there is no
+	reason to shift the left side (to square the values) when using the rawbits.
+
+	so actually ive already gotten rid of the squaring. But i hope i can optimize it more 
+	using bitwise operators because this is the MAIN calculation of the project and it 
+	is called countless times. Therefore the slightest optimization will yield massive returns!
+
+*/
