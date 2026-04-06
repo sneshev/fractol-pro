@@ -5,8 +5,7 @@ Mlx::Mlx() {
 	mlx_t* 			mlx;
 	mlx_image_t*	img;
 
-	// Gotta error check this stuff
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
+	if (!(mlx = mlx_init(WIDTH, HEIGHT, "Fractal", true)))
 	{
 		puts(mlx_strerror(mlx_errno));
 		exit(EXIT_FAILURE);
@@ -23,13 +22,7 @@ Mlx::Mlx() {
 		puts(mlx_strerror(mlx_errno));
 		exit(EXIT_FAILURE);
 	}
-	
-	// mlx_loop_hook(mlx, drawy, mlx);
-	// mlx_loop_hook(mlx, ft_hook, mlx);
 
-	// mlx_loop(mlx);
-	// mlx_terminate(mlx);
-	// exit(EXIT_SUCCESS);
 	_mlx = mlx;
 	_img = img;
 }
