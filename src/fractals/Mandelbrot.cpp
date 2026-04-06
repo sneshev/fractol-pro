@@ -19,7 +19,7 @@ unsigned int Mandelbrot::calcIterations(Fixed c[2]) {
 		y = x*y*2 + c[Y];
 		x = newX;
 		
-		if (Fixed::isOutOfRadius(x, y))
+		if (Fixed::isOutOfRadius(x.getRawBits(), y.getRawBits()))
 			return (count);
 	}
 	return (_maxIterations);

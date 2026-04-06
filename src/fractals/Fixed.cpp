@@ -170,7 +170,6 @@ Fixed Fixed::getDoubledValue() const {
 	return (f);
 }
 
-bool Fixed::isOutOfRadius(const Fixed& a, const Fixed& b) {
-	Fixed result(a.getDoubledValue() + b.getDoubledValue());
-	return ((result._value >> (_fractionalBitAmount + 2)) < 4) ? false : true; 
+bool Fixed::isOutOfRadius(const int a, const int b) {
+	return ((((a << 1) + (b << 1)) >> (_fractionalBitAmount + 2)) < 1) ? false : true; 
 }
