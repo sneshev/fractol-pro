@@ -4,8 +4,6 @@
 Fractal::Fractal(Mlx &inMlx, t_input &input) 
 	:	_mlx(inMlx),
 		_type(input.type),
-		_cReal(input.args[0]),
-		_cImag(input.args[1]),
 		_xMin(Fixed(MIN_REAL)),
 		_xMax(Fixed(MAX_REAL)),
 		_yMin(Fixed(MIN_IMAG)),
@@ -43,8 +41,6 @@ void Fractal::info() {
 		default:
 			break ;
 	}
-	cout << "c real: " <<  _cReal << endl;
-	cout << "c imag: " <<  _cImag << endl;
 	cout << "x min: " <<  _xMin << endl;
 	cout << "x max: " <<  _xMax << endl;
 	cout << "y min: " <<  _yMin << endl;

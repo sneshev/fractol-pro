@@ -10,9 +10,6 @@ class Fractal {
 		Mlx&			_mlx;
 		e_fract_type	_type;
 
-		Fixed			_cReal;
-		Fixed			_cImag;
-
 		Fixed			_xMin;
 		Fixed			_xMax;
 		Fixed			_yMin;
@@ -34,9 +31,6 @@ class Fractal {
 
 		mlx_t*			getMlx();
 		mlx_image_t*	getImg();
-
-		Fixed getCReal();
-		Fixed getCImag();
 
 		Fixed getXMin() const;
 		Fixed getXMax() const;
