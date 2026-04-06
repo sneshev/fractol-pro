@@ -76,3 +76,13 @@ void Fractal::setXMin(const Fixed &inX) { _xMin = inX; }
 void Fractal::setYMin(const Fixed &inY) { _yMin = inY; }
 void Fractal::setXMax(const Fixed &inX) { _xMax = inX; }
 void Fractal::setYMax(const Fixed &inY) { _yMax = inY; }
+
+void Fractal::adjustMaxIterations(const int i) {
+	long newValue = _maxIterations + i;
+	if (newValue < 10 || newValue > 2500) {
+		return ;
+	}
+	_maxIterations += i;
+	info();
+	draw();
+}

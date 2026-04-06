@@ -49,6 +49,7 @@ class Fractal {
 		void setYMin(const Fixed &inY);
 		void setYMax(const Fixed &inY);
 
+		void adjustMaxIterations(const int i);
 };
 
 int getColor(unsigned int iterations, unsigned int max_iterations);
