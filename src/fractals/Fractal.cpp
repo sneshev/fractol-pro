@@ -49,6 +49,8 @@ void Fractal::info() {
 	cout << "x max: " <<  _xMax << endl;
 	cout << "y min: " <<  _yMin << endl;
 	cout << "y max: " <<  _yMax << endl;
+	cout << "x range: " <<  getXRange() << endl;
+	cout << "y range: " <<  getYRange() << endl;
 	cout << "maxIterations: " << _maxIterations<< endl;
 }
 
@@ -59,8 +61,21 @@ Fixed Fractal::getXCenter() const	{ return ((_xMax + _xMin) / 2); }
 
 Fixed Fractal::getYMin() const		{ return (_yMin); }
 Fixed Fractal::getYMax() const		{ return (_yMax); }
-Fixed Fractal::getYRange() const	{ return (_yMax - _yMin); }
 Fixed Fractal::getYCenter() const	{ return ((_yMax + _yMin) / 2); }
+Fixed Fractal::getYRange() const	{ return (_yMax - _yMin); }
+
+Fixed Fractal::getXRangeHalf() const {
+	Fixed f(_xMax - _xMin);
+	f.halfValue();
+	return (f);
+}
+
+
+Fixed Fractal::getYRangeHalf() const {
+	Fixed f(_yMax - _yMin);
+	f.halfValue();
+	return (f);
+}
 
 void Fractal::setXMin(const Fixed &inX) { _xMin = inX; }
 void Fractal::setYMin(const Fixed &inY) { _yMin = inY; }

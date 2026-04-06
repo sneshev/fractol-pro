@@ -3,8 +3,8 @@
 void zoom(Fractal &fract, Fixed zoomRatio) {
 	Fixed centerX = fract.getXCenter();
 	Fixed centerY = fract.getYCenter();
-	Fixed newHalfRangeX = (fract.getXRange() * zoomRatio) / 2;
-	Fixed newHalfRangeY = (fract.getYRange() * zoomRatio) / 2;
+	Fixed newHalfRangeX = (fract.getXRangeHalf() * zoomRatio);
+	Fixed newHalfRangeY = (fract.getYRangeHalf() * zoomRatio);
 
 	fract.setXMin(centerX - newHalfRangeX);
 	fract.setYMin(centerY - newHalfRangeY);

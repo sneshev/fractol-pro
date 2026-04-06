@@ -15,6 +15,7 @@
 // mlx
 void mlx_keyhooks(void *inFractal);
 void zoom(Fractal &fract, Fixed zoomRatio);
+void move_center(Fractal &fract, Fixed rawX, Fixed rawY);
 
 // parsing
 bool isValidInput(int argc, char *argv[], t_input &input);

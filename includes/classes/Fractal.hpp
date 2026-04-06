@@ -40,13 +40,15 @@ class Fractal {
 
 		Fixed getXMin() const;
 		Fixed getXMax() const;
-		Fixed getXRange() const;
 		Fixed getXCenter() const;
+		Fixed getXRange() const;
+		Fixed getXRangeHalf() const;
 
 		Fixed getYMin() const;
 		Fixed getYMax() const;
 		Fixed getYCenter() const;
 		Fixed getYRange() const;
+		Fixed getYRangeHalf() const;
 
 		void setXMin(const Fixed &inX);
 		void setXMax(const Fixed &inX);

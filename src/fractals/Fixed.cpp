@@ -149,15 +149,11 @@ float Fixed::toFloat() const {
 	return (((float)_value / (1 << _fractionalBitAmount)));
 }
 
-Fixed& Fixed::min(Fixed& a, Fixed& b)	{ return (a < b) ? a : b; } 
-Fixed& Fixed::max(Fixed& a, Fixed& b)	{ return (a > b) ? a : b; } 
 
-const Fixed& Fixed::min(const Fixed& a, const Fixed& b)	{ return (a < b) ? a : b; } 
-const Fixed& Fixed::max(const Fixed& a, const Fixed& b)	{ return (a > b) ? a : b; } 
+void Fixed::halfValue() {
+	_value = _value >> 1;
+}
 
-
-// 	101010101010101010.01011010
-
-//	1.5 * 0.5
-//	15 * 5
-//	.75
+void Fixed::doubleValue() {
+	_value = _value << 1;
+}
