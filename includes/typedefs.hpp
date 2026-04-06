@@ -1,11 +1,12 @@
 #ifndef FRACT_TYPEDEFS_HPP
 #define FRACT_TYPEDEFS_HPP
 
-#include <array>
 #include <iostream>
 #include <algorithm>
+#include <array>
 #include <vector>
 #include <string>
+#include <thread>
 
 #define X 0
 #define Y 1
@@ -16,6 +17,7 @@
 
 #define str std::string
 #define arr std::array
+#define thread std::thread
 using std::cout;
 using std::cin;
 using std::endl;

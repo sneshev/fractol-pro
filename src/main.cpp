@@ -19,6 +19,5 @@ int main(int argc, char *argv[]) {
 	mlx_loop_hook(fract.getMlx(), mlx_keyhooks, &fract);
 
 	fract.mlxLoop();
-
 	return (EXIT_SUCCESS);
 }

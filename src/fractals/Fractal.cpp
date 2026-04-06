@@ -66,7 +66,6 @@ Fixed Fractal::getXRangeHalf() const {
 	return (f);
 }
 
-
 Fixed Fractal::getYRangeHalf() const {
 	Fixed f(_yMax - _yMin);
 	f.halfValue();

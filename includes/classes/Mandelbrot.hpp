@@ -7,6 +7,7 @@
 class Mandelbrot : public Fractal {
 	private:
 		unsigned int calcIterations(Fixed c[2], unsigned int maxIterations);
+		void drawRow(int yStart, int yEnd);
 	
 	public:
 		Mandelbrot(Mlx &inMlx, t_input &input);

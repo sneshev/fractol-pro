@@ -25,12 +25,12 @@ unsigned int Mandelbrot::calcIterations(Fixed c[2], unsigned int maxIterations) 
 	return (maxIterations);
 }
 
-void Mandelbrot::draw() {
+void Mandelbrot::drawRow(int yStart, int yEnd) {
 	Fixed c[2];
 
 	Fixed xStep = (_xMax - _xMin) / WIDTH;
 	Fixed yStep = (_yMax - _yMin) / HEIGHT;
-	for (int y = 0; y < HEIGHT; y++) {
+	for (int y = yStart; y < yEnd; y++) {
 		c[Y] = _yMin + yStep * y;
 		for (int x = 0; x < WIDTH; x++) {
 			c[X] = _xMin + xStep * x;
@@ -38,5 +38,22 @@ void Mandelbrot::draw() {
 			uint32_t pixelColor = getColor(iterations, _maxIterations);
 			mlx_put_pixel(getImg(), x, y, pixelColor);
 		}
+	}
+}
+
+void Mandelbrot::draw() {
+	int threadAmount = thread::hardware_concurrency();
+	if (!threadAmount) { threadAmount = 8; }
+
+	std::vector<thread> threads;
+	int rowsPerThread = HEIGHT / threadAmount;
+
+	for (int i = 0; i < threadAmount; i++) {
+		int yStart = i * rowsPerThread;
+		int yEnd = (i == threadAmount - 1) ? HEIGHT : yStart + rowsPerThread;
+		threads.emplace_back(&Mandelbrot::drawRow, this, yStart, yEnd);
+	}
+	for (thread &t: threads) {
+		t.join();
 	}
 }
