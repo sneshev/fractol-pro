@@ -157,3 +157,15 @@ void Fixed::halfValue() {
 void Fixed::doubleValue() {
 	_value = _value << 1;
 }
+
+Fixed Fixed::getHalvedValue() {
+	Fixed f;
+	f.setRawBits(_value >> 1);
+	return (f);
+}
+
+Fixed Fixed::getDoubledValue() {
+	Fixed f;
+	f.setRawBits(_value << 1);
+	return (f);
+}

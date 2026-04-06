@@ -8,6 +8,7 @@
 class Fractal {
 	protected:
 		Mlx&			_mlx;
+		uint8_t* 		_pixels;
 		e_fract_type	_type;
 
 		Fixed			_xMin;

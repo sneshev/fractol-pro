@@ -3,6 +3,7 @@
 
 Fractal::Fractal(Mlx &inMlx, t_input &input) 
 	:	_mlx(inMlx),
+		_pixels(getImg()->pixels),
 		_type(input.type),
 		_xMin(Fixed(MIN_REAL)),
 		_xMax(Fixed(MAX_REAL)),

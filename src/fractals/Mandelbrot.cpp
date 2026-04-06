@@ -10,24 +10,33 @@ Mandelbrot::~Mandelbrot() {
 	std::cout << RED << "Mandelbrot Destructor called" << RESET << std::endl;
 }
 
-unsigned int Mandelbrot::calcIterations(Fixed c[2], unsigned int maxIterations) {
+unsigned int Mandelbrot::calcIterations(Fixed c[2]) {
 	Fixed x = 0;
 	Fixed y = 0;
 
-	for (unsigned int count = 0; count < maxIterations; count++) {
+	for (unsigned int count = 0; count < _maxIterations; count++) {
 		Fixed newX = x*x - y*y + c[X];
-		y = Fixed(2)*x*y + c[Y];
+		y = x*y*2 + c[Y];
 		x = newX;
-
-		if (x*x + y*y >= 4)
+		
+		if (x.getDoubledValue() + y.getDoubledValue() >= 4)
 			return (count);
 	}
-	return (maxIterations);
+	return (_maxIterations);
+}
+
+void Mandelbrot::putPixel(unsigned int iterations, unsigned int pixelIndex) {
+	// mlx_put_pixel(getImg(), x, y, pixelColor);
+	uint8_t pixelColor[4];
+	getColor(iterations, _maxIterations, pixelColor);
+
+	_pixels[pixelIndex + 0] = pixelColor[R];
+	_pixels[pixelIndex + 1] = pixelColor[G];
+	_pixels[pixelIndex + 2] = pixelColor[B];
+	_pixels[pixelIndex + 3] = pixelColor[A];
 }
 
 void Mandelbrot::drawRow(int yStart, int yEnd) {
-	uint8_t *pixels = getImg()->pixels;
-	
 	Fixed c[2];
 	Fixed xStep = (_xMax - _xMin) / WIDTH;
 	Fixed yStep = (_yMax - _yMin) / HEIGHT;
@@ -36,17 +45,9 @@ void Mandelbrot::drawRow(int yStart, int yEnd) {
 		int rowOffset = y * WIDTH * 4;
 		for (int x = 0; x < WIDTH; x++) {
 			c[X] = _xMin + xStep * x;
-			unsigned int iterations = calcIterations(c, _maxIterations);
-			
-			uint8_t pixelColor[4];
-			getColor(iterations, _maxIterations, pixelColor);
-			// mlx_put_pixel(getImg(), x, y, pixelColor);
-			
-			int index  = rowOffset + x * 4;
-			pixels[index + 0] = pixelColor[R];
-			pixels[index + 1] = pixelColor[G];
-			pixels[index + 2] = pixelColor[B];
-			pixels[index + 3] = pixelColor[A];
+			unsigned int iterations = calcIterations(c);
+			unsigned int pixelIndex = rowOffset + x * 4;
+			putPixel(iterations, pixelIndex);
 		}
 	}
 }

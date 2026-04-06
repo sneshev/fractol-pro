@@ -53,8 +53,10 @@ class Fixed {
 		Fixed	operator--(int);
 		Fixed&	operator--(void);
 
-		void halfValue();
-		void doubleValue();
+		void	halfValue();
+		void	doubleValue();
+		Fixed	getHalvedValue();
+		Fixed	getDoubledValue();
 };
 
 std::ostream& operator<<(std::ostream &stream, const Fixed& fixed);
