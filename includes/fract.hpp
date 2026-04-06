@@ -13,7 +13,8 @@
 #include <stdbool.h>
 
 // mlx
-Mlx initializeMlx();
+void mlx_keyhooks(void *inFractal);
+void zoom(Fractal &fract, Fixed zoomRatio);
 
 // parsing
 bool isValidInput(int argc, char *argv[], t_input &input);

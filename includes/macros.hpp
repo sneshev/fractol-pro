@@ -7,6 +7,7 @@ const std::vector<str> validTypes = {"mandelbrot", "julia"};
 #define HEIGHT 512
 
 #define MAX_ITERATIONS 50
+#define ZOOM_RATIO 0.7f
 
 #define MIN_REAL -2.0f
 #define MAX_REAL  2.0f
