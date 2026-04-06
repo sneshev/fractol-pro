@@ -13,7 +13,6 @@ class Mlx {
 		~Mlx();
 
 		void loop();
-		void terminate();
 
 		mlx_t*			getMlx();
 		mlx_image_t*	getImg();

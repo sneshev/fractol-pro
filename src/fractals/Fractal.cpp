@@ -21,8 +21,12 @@ void Fractal::mlxLoop() {
 	_mlx.loop();
 }
 
-void Fractal::mlxTerminate() {
-	_mlx.terminate();
+mlx_t* Fractal::getMlx() {
+	return (_mlx.getMlx());
+}
+
+mlx_image_t* Fractal::getImg() {
+	return (_mlx.getImg());
 }
 
 void Fractal::info() {
@@ -44,12 +48,4 @@ void Fractal::info() {
 	cout << "maxRangeX: " << _yRange[MIN] << endl;
 	cout << "maxRangeX: " << _yRange[MAX] << endl;
 	cout << "maxIterations: " << _maxIterations<< endl;
-}
-
-mlx_t* Fractal::getMlx() {
-	return (_mlx.getMlx());
-}
-
-mlx_image_t* Fractal::getImg() {
-	return (_mlx.getImg());
 }

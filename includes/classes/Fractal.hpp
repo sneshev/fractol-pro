@@ -22,7 +22,6 @@ class Fractal {
 
 		void info();
 		void mlxLoop();
-		void mlxTerminate();
 
 		virtual void draw() = 0;
 		// void zoom();
@@ -37,5 +36,7 @@ class Fractal {
 		Fixed getXRange();
 		Fixed getYRange();
 };
+
+int getColor(unsigned int iterations, unsigned int max_iterations);
 
 #endif
