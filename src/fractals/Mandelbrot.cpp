@@ -26,17 +26,27 @@ unsigned int Mandelbrot::calcIterations(Fixed c[2], unsigned int maxIterations) 
 }
 
 void Mandelbrot::drawRow(int yStart, int yEnd) {
+	uint8_t *pixels = getImg()->pixels;
+	
 	Fixed c[2];
-
 	Fixed xStep = (_xMax - _xMin) / WIDTH;
 	Fixed yStep = (_yMax - _yMin) / HEIGHT;
 	for (int y = yStart; y < yEnd; y++) {
 		c[Y] = _yMin + yStep * y;
+		int rowOffset = y * WIDTH * 4;
 		for (int x = 0; x < WIDTH; x++) {
 			c[X] = _xMin + xStep * x;
 			unsigned int iterations = calcIterations(c, _maxIterations);
-			uint32_t pixelColor = getColor(iterations, _maxIterations);
-			mlx_put_pixel(getImg(), x, y, pixelColor);
+			
+			uint8_t pixelColor[4];
+			getColor(iterations, _maxIterations, pixelColor);
+			// mlx_put_pixel(getImg(), x, y, pixelColor);
+			
+			int index  = rowOffset + x * 4;
+			pixels[index + 0] = pixelColor[R];
+			pixels[index + 1] = pixelColor[G];
+			pixels[index + 2] = pixelColor[B];
+			pixels[index + 3] = pixelColor[A];
 		}
 	}
 }

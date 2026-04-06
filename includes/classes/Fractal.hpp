@@ -52,6 +52,6 @@ class Fractal {
 		void adjustMaxIterations(const int i);
 };
 
-int getColor(unsigned int iterations, unsigned int max_iterations);
+void getColor(unsigned int iterations, unsigned int max_iterations, uint8_t pixelColor[4]);
 
 #endif

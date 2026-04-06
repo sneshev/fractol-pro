@@ -14,6 +14,10 @@
 #define MIN 0
 #define MAX 1
 
+#define R 0
+#define G 1
+#define B 2
+#define A 3
 
 #define str std::string
 #define arr std::array
@@ -32,5 +36,12 @@ typedef struct s_input {
 	e_fract_type		type;
 	std::vector<float>	args;
 }	t_input;
+
+typedef struct s_pixel {
+	uint8_t r;
+	uint8_t g;
+	uint8_t b;
+	uint8_t a;
+}	t_pixel;
 
 #endif

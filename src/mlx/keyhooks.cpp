@@ -4,10 +4,8 @@
 
 void mlx_keyhooks(void *inFractal) {
 	Fractal &fract = *(Fractal *)inFractal;
-
 	mlx_t *mlx = fract.getMlx();
-	// mlx_image_t *img = fract.getImg();
-
+	
 	{ /* quit program */
 		if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 			mlx_close_window(mlx);
