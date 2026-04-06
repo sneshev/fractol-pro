@@ -158,14 +158,19 @@ void Fixed::doubleValue() {
 	_value = _value << 1;
 }
 
-Fixed Fixed::getHalvedValue() {
+Fixed Fixed::getHalvedValue() const {
 	Fixed f;
 	f.setRawBits(_value >> 1);
 	return (f);
 }
 
-Fixed Fixed::getDoubledValue() {
+Fixed Fixed::getDoubledValue() const {
 	Fixed f;
 	f.setRawBits(_value << 1);
 	return (f);
+}
+
+bool Fixed::isOutOfRadius(const Fixed& a, const Fixed& b) {
+	Fixed result(a.getDoubledValue() + b.getDoubledValue());
+	return ((result._value >> (_fractionalBitAmount + 2)) < 4) ? false : true; 
 }

@@ -55,8 +55,10 @@ class Fixed {
 
 		void	halfValue();
 		void	doubleValue();
-		Fixed	getHalvedValue();
-		Fixed	getDoubledValue();
+		Fixed	getHalvedValue() const;
+		Fixed	getDoubledValue() const;
+
+		static bool isOutOfRadius(const Fixed& a, const Fixed& b);
 };
 
 std::ostream& operator<<(std::ostream &stream, const Fixed& fixed);
