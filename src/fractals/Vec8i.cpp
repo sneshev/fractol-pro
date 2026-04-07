@@ -21,7 +21,12 @@ Vec8i Vec8i::operator-(const Vec8i& other) const {
 }
 
 Vec8i Vec8i::operator*(const Vec8i& other) const {
-	//...
+	__m256i prodEven = _mm256_mul_epi32(v, other.v);
+	__m256i prodOdd  = _mm256_mul_epi32(_mm256_srli_epi64(v, 32), _mm256_srli_epi64(other.v, 32));
+
+	__m256i result = _mm256_or_si256(prodEven, _mm256_slli_epi64(prodOdd, 32));
+	
+    return Vec8i(result).shiftRight(_fractionalBitAmount);
 }
 
 Vec8i Vec8i::shiftRight(int bits) const {
