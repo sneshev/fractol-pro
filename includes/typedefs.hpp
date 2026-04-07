@@ -26,6 +26,8 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+typedef uint8_t	t_v4 __attribute__ ((vector_size(4 * sizeof(uint8_t))));
+
 typedef enum s_fract_type {
 	FRCT_MANDELBROT,
 	FRCT_JULIA,

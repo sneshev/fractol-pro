@@ -15,11 +15,13 @@ unsigned int Mandelbrot::calcIterations(Fixed c[2]) {
 	Fixed y = 0;
 
 	for (unsigned int count = 0; count < _maxIterations; count++) {
-		Fixed newX = x*x - y*y + c[X];
+		Fixed x2=x*x;
+		Fixed y2=y*y;
+		Fixed newX = x2 - y2 + c[X];
 		y = x*y*2 + c[Y];
 		x = newX;
 		
-		if (Fixed::isOutOfRadius(x.getRawBits(), y.getRawBits()))
+		if (x2+y2 > 4)
 			return (count);
 	}
 	return (_maxIterations);
@@ -27,13 +29,9 @@ unsigned int Mandelbrot::calcIterations(Fixed c[2]) {
 
 void Mandelbrot::putPixel(unsigned int iterations, unsigned int pixelIndex) {
 	// mlx_put_pixel(getImg(), x, y, pixelColor);
-	uint8_t pixelColor[4];
-	getColor(iterations, _maxIterations, pixelColor);
+	t_v4 color = getColor(iterations, _maxIterations);
 
-	_pixels[pixelIndex + 0] = pixelColor[R];
-	_pixels[pixelIndex + 1] = pixelColor[G];
-	_pixels[pixelIndex + 2] = pixelColor[B];
-	_pixels[pixelIndex + 3] = pixelColor[A];
+	_pixels[pixelIndex] = color;
 }
 
 void Mandelbrot::drawRow(int yStart, int yEnd) {
@@ -42,11 +40,11 @@ void Mandelbrot::drawRow(int yStart, int yEnd) {
 	Fixed yStep = (_yMax - _yMin) / HEIGHT;
 	for (int y = yStart; y < yEnd; y++) {
 		c[Y] = _yMin + yStep * y;
-		int rowOffset = y * WIDTH * 4;
+		int rowOffset = y * WIDTH;
 		for (int x = 0; x < WIDTH; x++) {
 			c[X] = _xMin + xStep * x;
 			unsigned int iterations = calcIterations(c);
-			unsigned int pixelIndex = rowOffset + x * 4;
+			unsigned int pixelIndex = rowOffset + x;
 			putPixel(iterations, pixelIndex);
 		}
 	}

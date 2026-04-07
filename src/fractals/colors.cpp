@@ -5,24 +5,14 @@
     // return (r << 24 | g << 16 | b << 8 | a);
 // }
 
-void getColor(unsigned int iterations, unsigned int max_iterations, uint8_t pixelColor[4]) {
+t_v4 getColor(unsigned int iterations, unsigned int max_iterations) {
     if (iterations == max_iterations) {
-        pixelColor[R] = 0;
-        pixelColor[G] = 0;
-        pixelColor[B] = 0;
-        pixelColor[A] = 255;
-        return ;
+        return ((t_v4){0, 0, 0, 255});
     }
-
     if (iterations < 6) {
-        pixelColor[R] = 255;
-        pixelColor[G] = iterations * 40;
-        pixelColor[B] = 0;
-        pixelColor[A] = 255;
-    } else {
-        pixelColor[R] = 255 - iterations * 5;
-        pixelColor[G] = 0;
-        pixelColor[B] = iterations * 10;
-        pixelColor[A] = 255;
+        return ((t_v4){255, (uint8_t)(iterations * 40), 0, 255});
+    }
+    else {
+        return ((t_v4){(uint8_t)(255 - iterations * 5), 0, (uint8_t)(iterations * 10), 255});
     }
 }
