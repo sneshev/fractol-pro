@@ -11,7 +11,7 @@ Mandelbrot::~Mandelbrot() {
 	std::cout << RED << "Mandelbrot Destructor called" << RESET << std::endl;
 }
 
-unsigned int Mandelbrot::calcIterations(Fixed c[2]) {
+Vec8i Mandelbrot::calcIterations(Vec8i cX, Vec8i cY) {
 	Fixed x = 0;
 	Fixed y = 0;
 
@@ -36,17 +36,25 @@ void Mandelbrot::putPixel(unsigned int iterations, unsigned int pixelIndex) {
 }
 
 void Mandelbrot::drawRow(int yStart, int yEnd) {
-	Fixed c[2];
 	Fixed xStep = (_xMax - _xMin) / width;
 	Fixed yStep = (_yMax - _yMin) / height;
 	for (int y = yStart; y < yEnd; y++) {
-		c[Y] = _yMin + yStep * y;
+		Vec8i cY(_yMin + yStep * y);
 		int rowOffset = y * width;
-		for (int x = 0; x < width; x++) {
-			c[X] = _xMin + xStep * x;
-			unsigned int iterations = calcIterations(c);
+		for (int x = 0; x < width; x += 8) {
+			Vec8i cX(
+				_xMin + xStep * (x + 7),
+				_xMin + xStep * (x + 6),
+				_xMin + xStep * (x + 5),
+				_xMin + xStep * (x + 4),
+				_xMin + xStep * (x + 3),
+				_xMin + xStep * (x + 2),
+				_xMin + xStep * (x + 1),
+				_xMin + xStep * (x + 0)
+			);
+			Vec8i iterations = calcIterations(cX, cY);
 			unsigned int pixelIndex = rowOffset + x;
-			putPixel(iterations, pixelIndex);
+			// putPixel(iterations, pixelIndex);
 		}
 	}
 }

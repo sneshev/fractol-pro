@@ -3,6 +3,7 @@
 
 #include "../MLX42/include/MLX42/MLX42.h"
 #include "Fixed.hpp"
+#include "Vec8i.hpp"
 #include "Fractal.hpp"
 #include "Mandelbrot.hpp"
 #include "macros.hpp"

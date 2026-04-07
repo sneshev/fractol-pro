@@ -2,7 +2,45 @@
 
 const int Vec8i::_fractionalBitAmount = FIXED_FRACTIONAL_BITS;
 
-Vec8i::Vec8i(__m256i val) : v(val) {}
+Vec8i::Vec8i(__m256i val)
+	: v(val) 
+{
+
+}
+
+Vec8i::Vec8i(int32_t i)
+	: Vec8i(set1(i)) 
+{
+	;
+}
+
+Vec8i::Vec8i(Fixed f)
+	: Vec8i(set1(f.getRawBits()))
+{
+
+}
+Vec8i::Vec8i(int32_t a7, int32_t a6, int32_t a5, int32_t a4, int32_t a3, int32_t a2, int32_t a1, int32_t a0)
+	: Vec8i(set(a7, a6, a5, a4, a3, a2, a1, a0))
+{
+
+}
+
+Vec8i::Vec8i(Fixed f7, Fixed f6, Fixed f5, Fixed f4, Fixed f3, Fixed f2, Fixed f1, Fixed f0)
+	: Vec8i(set(
+		f7.getRawBits(), 
+		f6.getRawBits(), 
+		f5.getRawBits(), 
+		f4.getRawBits(), 
+		f3.getRawBits(), 
+		f2.getRawBits(), 
+		f1.getRawBits(), 
+		f0.getRawBits())
+	)
+{
+
+}
+
+
 
 Vec8i Vec8i::set1(int value) {
 	return Vec8i(_mm256_set1_epi32(value));

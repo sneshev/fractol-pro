@@ -6,7 +6,7 @@
 
 class Mandelbrot : public Fractal {
 	private:
-		unsigned int calcIterations(Fixed c[2]);
+		Vec8i calcIterations(Vec8i cX, Vec8i cY);
 		void drawRow(int yStart, int yEnd);
 		void putPixel(unsigned int iterations, unsigned int pixelIndex);
 
