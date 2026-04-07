@@ -5,12 +5,12 @@ Mlx::Mlx() {
 	mlx_t* 			mlx;
 	mlx_image_t*	img;
 
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "Fractal", true)))
+	if (!(mlx = mlx_init(width, height, "Fractal", true)))
 	{
 		puts(mlx_strerror(mlx_errno));
 		exit(EXIT_FAILURE);
 	}
-	if (!(img = mlx_new_image(mlx, WIDTH, HEIGHT)))
+	if (!(img = mlx_new_image(mlx, width, height)))
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));

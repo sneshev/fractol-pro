@@ -1,4 +1,5 @@
 #include "Mandelbrot.hpp"
+#include "fract.hpp"
 
 Mandelbrot::Mandelbrot(Mlx &inMlx, t_input &input) 
 	: Fractal(inMlx, input)
@@ -36,12 +37,12 @@ void Mandelbrot::putPixel(unsigned int iterations, unsigned int pixelIndex) {
 
 void Mandelbrot::drawRow(int yStart, int yEnd) {
 	Fixed c[2];
-	Fixed xStep = (_xMax - _xMin) / WIDTH;
-	Fixed yStep = (_yMax - _yMin) / HEIGHT;
+	Fixed xStep = (_xMax - _xMin) / width;
+	Fixed yStep = (_yMax - _yMin) / height;
 	for (int y = yStart; y < yEnd; y++) {
 		c[Y] = _yMin + yStep * y;
-		int rowOffset = y * WIDTH;
-		for (int x = 0; x < WIDTH; x++) {
+		int rowOffset = y * width;
+		for (int x = 0; x < width; x++) {
 			c[X] = _xMin + xStep * x;
 			unsigned int iterations = calcIterations(c);
 			unsigned int pixelIndex = rowOffset + x;
@@ -55,11 +56,11 @@ void Mandelbrot::draw() {
 	if (!threadAmount) { threadAmount = 8; }
 
 	std::vector<thread> threads;
-	int rowsPerThread = HEIGHT / threadAmount;
+	int rowsPerThread = height / threadAmount;
 
 	for (int i = 0; i < threadAmount; i++) {
 		int yStart = i * rowsPerThread;
-		int yEnd = (i == threadAmount - 1) ? HEIGHT : yStart + rowsPerThread;
+		int yEnd = (i == threadAmount - 1) ? height : yStart + rowsPerThread;
 		threads.emplace_back(&Mandelbrot::drawRow, this, yStart, yEnd);
 	}
 	for (thread &t: threads) {

@@ -3,7 +3,11 @@
 
 #include <iostream>
 #include <vector>
-const std::vector<std::string> validTypes = {"mandelbrot", "julia"};
+
+const std::vector<std::string> validTypes = {
+	"mandelbrot",
+	"julia"
+};
 
 #define FIXED_FRACTIONAL_BITS 22
 
