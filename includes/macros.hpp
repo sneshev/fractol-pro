@@ -1,6 +1,8 @@
 #ifndef FRACT_MACROS_HPP
 #define FRACT_MACROS_HPP
 
+#include <iostream>
+#include <vector>
 const std::vector<std::string> validTypes = {"mandelbrot", "julia"};
 
 #define FIXED_FRACTIONAL_BITS 22
