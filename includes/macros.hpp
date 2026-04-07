@@ -14,10 +14,11 @@ const std::vector<std::string> validTypes = {
 #define WIDTH	512
 #define HEIGHT	512
 
-#define ZOOM_RATIO 0.7f
+#define ZOOM_RATIO 0.9f
+#define MOVE_RATIO 0.03f
+#define ITERATION_RATIO 20
 
 #define MAX_ITERATIONS 50
-#define ITERATION_RATIO 20
 
 #define MIN_REAL -2.0f
 #define MAX_REAL  2.0f

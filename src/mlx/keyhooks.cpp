@@ -1,7 +1,5 @@
 #include "fract.hpp"
 
-#define MOVE_RATIO 0.05f
-
 void mlx_keyhooks(void *inFractal) {
 	Fractal &fract = *(Fractal *)inFractal;
 	mlx_t *mlx = fract.getMlx();
