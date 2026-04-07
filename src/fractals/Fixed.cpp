@@ -1,6 +1,6 @@
 #include "Fixed.hpp"
 
-const int Fixed::_fractionalBitAmount = 22;
+const int Fixed::_fractionalBitAmount = FIXED_FRACTIONAL_BITS;
 
 
 		/*		CONSTRUCTORS AND DESTRUCTORS	*/

@@ -2,7 +2,7 @@
 #define FIXED_HPP
 
 #include "../MLX42/include/MLX42/MLX42.h"
-
+#include "macros.hpp"
 #include <iostream>
 
 #define RED "\033[31m"
