@@ -13,7 +13,7 @@ Mandelbrot::~Mandelbrot() {
 
 Vec8i Mandelbrot::calcIterations(Vec8i cX, Vec8i cY) {
     static const Vec8i one(1);
-	static const Vec8i four(4);
+	static const Vec8i four(Fixed(4));
 
 	Vec8i x(0);
 	Vec8i y(0);
@@ -27,6 +27,7 @@ Vec8i Mandelbrot::calcIterations(Vec8i cX, Vec8i cY) {
 		y = (x*y).shiftLeft(1) + cY;
 		x = newX;
 
+        // __m256i notEscaped = _mm256_cmpgt_epi32((x2 + y2).v, four.v);
         __m256i notEscaped = _mm256_cmpgt_epi32(four.v, (x2 + y2).v);
 		aliveMask = _mm256_and_si256(aliveMask, notEscaped);
 		if (!_mm256_movemask_epi8(aliveMask))
@@ -37,10 +38,6 @@ Vec8i Mandelbrot::calcIterations(Vec8i cX, Vec8i cY) {
             _mm256_and_si256(one.v, aliveMask)
         );
 
-		// Vec8i newX = x2 - y2 + cX;
-        // Vec8i newY = (x * y).shiftLeft(1) + cY;
-		// Vec8i newX = x2 - y2 + cX;
-        // Vec8i newY = (x * y).shiftLeft(1) + cY;
 	}
 	return (iterationCount);
 }
@@ -54,7 +51,7 @@ void Mandelbrot::putPixel(unsigned int iterations, unsigned int pixelIndex) {
 void Mandelbrot::drawRow(int yStart, int yEnd) {
 	Fixed xStep = (_xMax - _xMin) / width;
 	Fixed yStep = (_yMax - _yMin) / height;
-	Vec8i increment = Vec8i(xStep) * Vec8i(8);
+	Vec8i increment = Vec8i(xStep * 8);
 
 	for (int y = yStart; y < yEnd; y++) {
 		Vec8i cY(_yMin + yStep * y);
@@ -74,7 +71,6 @@ void Mandelbrot::drawRow(int yStart, int yEnd) {
 			Vec8i iterations = calcIterations(cX, cY);
 			(void)iterations;
 			(void)rowOffset;
-			cout << x << ", "<< y << endl;
 			unsigned int pixelIndex = rowOffset + x;
 			putPixel(_mm256_extract_epi32(iterations.v, 0), pixelIndex + 0);
 			putPixel(_mm256_extract_epi32(iterations.v, 1), pixelIndex + 1);

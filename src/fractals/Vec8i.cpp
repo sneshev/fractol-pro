@@ -8,22 +8,18 @@ Vec8i::Vec8i(__m256i val)
 
 }
 
-Vec8i::Vec8i(int32_t i)
-	: Vec8i(set1(i)) 
-{
-	;
-}
-
 Vec8i::Vec8i(Fixed f)
 	: Vec8i(set1(f.getRawBits()))
 {
 
 }
-Vec8i::Vec8i(int32_t a7, int32_t a6, int32_t a5, int32_t a4, int32_t a3, int32_t a2, int32_t a1, int32_t a0)
-	: Vec8i(set(a7, a6, a5, a4, a3, a2, a1, a0))
+
+Vec8i::Vec8i(int32_t i)
+	: Vec8i(set1(i))
 {
 
 }
+
 
 Vec8i::Vec8i(Fixed f7, Fixed f6, Fixed f5, Fixed f4, Fixed f3, Fixed f2, Fixed f1, Fixed f0)
 	: Vec8i(set(
@@ -59,12 +55,15 @@ Vec8i Vec8i::operator-(const Vec8i& other) const {
 }
 
 Vec8i Vec8i::operator*(const Vec8i& other) const {
-	__m256i prodEven = _mm256_mul_epi32(v, other.v);
-	__m256i prodOdd  = _mm256_mul_epi32(_mm256_srli_epi64(v, 32), _mm256_srli_epi64(other.v, 32));
+    __m256i prodEven = _mm256_mul_epi32(v, other.v);
+    __m256i prodOdd  = _mm256_mul_epi32(_mm256_srli_epi64(v, 32), _mm256_srli_epi64(other.v, 32));
 
-	__m256i result = _mm256_or_si256(prodEven, _mm256_slli_epi64(prodOdd, 32));
-	
-    return Vec8i(result).shiftRight(_fractionalBitAmount);
+    prodEven = _mm256_srli_epi64(prodEven, _fractionalBitAmount);
+    prodOdd  = _mm256_srli_epi64(prodOdd,  _fractionalBitAmount);
+
+    prodOdd = _mm256_slli_epi64(prodOdd, 32);
+
+    return Vec8i(_mm256_blend_epi32(prodEven, prodOdd, 0b10101010));
 }
 
 Vec8i Vec8i::shiftRight(int bits) const {
