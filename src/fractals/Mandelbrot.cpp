@@ -37,17 +37,16 @@ Vec8i Mandelbrot::calcIterations(Vec8i cX, Vec8i cY) {
             _mm256_and_si256(one.v, aliveMask)
         );
 
-		Vec8i newX = x2 - y2 + cX;
-        Vec8i newY = (x * y).shiftLeft(1) + cY;
-		Vec8i newX = x2 - y2 + cX;
-        Vec8i newY = (x * y).shiftLeft(1) + cY;
+		// Vec8i newX = x2 - y2 + cX;
+        // Vec8i newY = (x * y).shiftLeft(1) + cY;
+		// Vec8i newX = x2 - y2 + cX;
+        // Vec8i newY = (x * y).shiftLeft(1) + cY;
 	}
 	return (iterationCount);
 }
 
-void Mandelbrot::putPixel(Vec8i iterations, unsigned int pixelIndex) {
-	// mlx_put_pixel(getImg(), x, y, pixelColor);
-	__m256i color = getColors(iterations, _maxIterations);
+void Mandelbrot::putPixel(unsigned int iterations, unsigned int pixelIndex) {
+	t_v4 color = getColors(iterations, _maxIterations);
 
 	_pixels[pixelIndex] = color;
 }
@@ -73,8 +72,18 @@ void Mandelbrot::drawRow(int yStart, int yEnd) {
 
 		for (int x = 0; x < width; x += 8) {
 			Vec8i iterations = calcIterations(cX, cY);
+			(void)iterations;
+			(void)rowOffset;
+			cout << x << ", "<< y << endl;
 			unsigned int pixelIndex = rowOffset + x;
-			putPixel(iterations, pixelIndex);
+			putPixel(_mm256_extract_epi32(iterations.v, 0), pixelIndex + 0);
+			putPixel(_mm256_extract_epi32(iterations.v, 1), pixelIndex + 1);
+			putPixel(_mm256_extract_epi32(iterations.v, 2), pixelIndex + 2);
+			putPixel(_mm256_extract_epi32(iterations.v, 3), pixelIndex + 3);
+			putPixel(_mm256_extract_epi32(iterations.v, 4), pixelIndex + 4);
+			putPixel(_mm256_extract_epi32(iterations.v, 5), pixelIndex + 5);
+			putPixel(_mm256_extract_epi32(iterations.v, 6), pixelIndex + 6);
+			putPixel(_mm256_extract_epi32(iterations.v, 7), pixelIndex + 7);
 			cX = cX + increment;
 		}
 	}

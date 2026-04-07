@@ -2,13 +2,15 @@
 #define FRACTAL_HPP
 
 #include "Fixed.hpp"
+#include "Vec8i.hpp"
 #include "Mlx.hpp"
 #include "typedefs.hpp"
+#include <immintrin.h>
 
 class Fractal {
 	protected:
 		Mlx&			_mlx;
-		__m256i*		_pixels;
+		t_v4*			_pixels;
 		e_fract_type	_type;
 
 		Fixed			_xMin;
@@ -53,6 +55,6 @@ class Fractal {
 		void adjustMaxIterations(const int i);
 };
 
-__m256i getColors(Vec8i iterations, unsigned int max_iterations);
+t_v4 getColors(int iterations, int max_iterations);
 
 #endif
