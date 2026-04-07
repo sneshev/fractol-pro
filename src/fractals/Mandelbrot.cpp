@@ -55,23 +55,27 @@ void Mandelbrot::putPixel(Vec8i iterations, unsigned int pixelIndex) {
 void Mandelbrot::drawRow(int yStart, int yEnd) {
 	Fixed xStep = (_xMax - _xMin) / width;
 	Fixed yStep = (_yMax - _yMin) / height;
+	Vec8i increment = Vec8i(xStep) * Vec8i(8);
+
 	for (int y = yStart; y < yEnd; y++) {
 		Vec8i cY(_yMin + yStep * y);
 		int rowOffset = y * width;
-		for (int x = 0; x < width; x += 8) {
 			Vec8i cX(
-				_xMin + xStep * (x + 7),
-				_xMin + xStep * (x + 6),
-				_xMin + xStep * (x + 5),
-				_xMin + xStep * (x + 4),
-				_xMin + xStep * (x + 3),
-				_xMin + xStep * (x + 2),
-				_xMin + xStep * (x + 1),
-				_xMin + xStep * (x + 0)
+				_xMin + xStep * 7,
+				_xMin + xStep * 6,
+				_xMin + xStep * 5,
+				_xMin + xStep * 4,
+				_xMin + xStep * 3,
+				_xMin + xStep * 2,
+				_xMin + xStep * 1,
+				_xMin + xStep * 0
 			);
+
+		for (int x = 0; x < width; x += 8) {
 			Vec8i iterations = calcIterations(cX, cY);
 			unsigned int pixelIndex = rowOffset + x;
 			putPixel(iterations, pixelIndex);
+			cX = cX + increment;
 		}
 	}
 }
