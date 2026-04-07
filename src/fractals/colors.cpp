@@ -5,14 +5,14 @@
     // return (r << 24 | g << 16 | b << 8 | a);
 // }
 
-t_v4 getColor(unsigned int iterations, unsigned int max_iterations) {
-    if (iterations == max_iterations) {
-        return ((t_v4){0, 0, 0, 255});
-    }
-    if (iterations < 6) {
-        return ((t_v4){255, (uint8_t)(iterations * 40), 0, 255});
-    }
-    else {
-        return ((t_v4){(uint8_t)(255 - iterations * 5), 0, (uint8_t)(iterations * 10), 255});
-    }
+__m256i getColors(Vec8i iterations, unsigned int max_iterations) {
+    // if (iterations == max_iterations) {
+        // return ((t_v4){0, 0, 0, 255});
+    // }
+    // if (iterations < 6) {
+        // return ((t_v4){255, (uint8_t)(iterations * 40), 0, 255});
+    // }
+    // else {
+        // return ((t_v4){(uint8_t)(255 - iterations * 5), 0, (uint8_t)(iterations * 10), 255});
+    // }
 }

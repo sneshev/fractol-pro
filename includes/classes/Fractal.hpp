@@ -8,7 +8,7 @@
 class Fractal {
 	protected:
 		Mlx&			_mlx;
-		t_v4* 			_pixels;
+		__m256i*		_pixels;
 		e_fract_type	_type;
 
 		Fixed			_xMin;
@@ -53,6 +53,6 @@ class Fractal {
 		void adjustMaxIterations(const int i);
 };
 
-t_v4 getColor(unsigned int iterations, unsigned int max_iterations);
+__m256i getColors(Vec8i iterations, unsigned int max_iterations);
 
 #endif
