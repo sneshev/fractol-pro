@@ -11,13 +11,13 @@ Mandelbrot::~Mandelbrot() {
 	std::cout << RED << "Mandelbrot Destructor called" << RESET << std::endl;
 }
 
-Vec8i Mandelbrot::calcIterations(Vec8i cX, Vec8i cY) {
+__m256i Mandelbrot::calcIterations(Vec8i cX, Vec8i cY) {
 	static const Vec8i one(1);
 	static const Vec8i four(Fixed(4));
 
 	Vec8i x(0);
 	Vec8i y(0);
-	Vec8i iterationCount(0);
+	__m256i iterationCount = _mm256_set1_epi32(0);
 
 	__m256i aliveMask = _mm256_set1_epi32(-1); // all pixels start alive
 	for (unsigned int count = 0; count < _maxIterations; count++) {
@@ -32,18 +32,22 @@ Vec8i Mandelbrot::calcIterations(Vec8i cX, Vec8i cY) {
 		if (!_mm256_movemask_epi8(aliveMask))
 			break;
 
-		iterationCount.v = _mm256_add_epi32(
-			iterationCount.v,
+		iterationCount = _mm256_add_epi32(
+			iterationCount,
 			_mm256_and_si256(one.v, aliveMask)
 		);
 	}
 	return (iterationCount);
 }
 
-void Mandelbrot::putPixel(unsigned int iterations, unsigned int pixelIndex) {
-	t_v4 color = getColors(iterations, _maxIterations);
+void Mandelbrot::put8Pixels(__m256i iterations, unsigned int pixelIndex) {
+    alignas(32) int32_t iterArr[8];
+    _mm256_store_si256((__m256i*)iterArr, iterations);
 
-	_pixels[pixelIndex] = color;
+    for (int i = 0; i < 8; i++) {
+        t_v4 color = getColors(iterArr[i], _maxIterations);
+        _pixels[pixelIndex + i] = color;
+    }
 }
 
 void Mandelbrot::drawRow(int yStart, int yEnd) {
@@ -64,18 +68,10 @@ void Mandelbrot::drawRow(int yStart, int yEnd) {
 			_xMin + xStep * 1,
 			_xMin + xStep * 0
 		);
-
 		for (int x = 0; x < width; x += 8) {
-			Vec8i iterations = calcIterations(cX, cY);
+			__m256i iterations = calcIterations(cX, cY);
 			unsigned int pixelIndex = rowOffset + x;
-			putPixel(_mm256_extract_epi32(iterations.v, 0), pixelIndex + 0);
-			putPixel(_mm256_extract_epi32(iterations.v, 1), pixelIndex + 1);
-			putPixel(_mm256_extract_epi32(iterations.v, 2), pixelIndex + 2);
-			putPixel(_mm256_extract_epi32(iterations.v, 3), pixelIndex + 3);
-			putPixel(_mm256_extract_epi32(iterations.v, 4), pixelIndex + 4);
-			putPixel(_mm256_extract_epi32(iterations.v, 5), pixelIndex + 5);
-			putPixel(_mm256_extract_epi32(iterations.v, 6), pixelIndex + 6);
-			putPixel(_mm256_extract_epi32(iterations.v, 7), pixelIndex + 7);
+			put8Pixels(iterations, pixelIndex);
 			cX = cX + increment;
 		}
 	}
