@@ -13,8 +13,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-constexpr int width  = WIDTH  - (WIDTH  % 8);
-constexpr int height = HEIGHT - (HEIGHT % 8);
+constexpr int width  = WIDTH  - (WIDTH  % 16);
+constexpr int height = HEIGHT - (HEIGHT % 16);
 
 // mlx
 void mlx_keyhooks(void *inFractal);
