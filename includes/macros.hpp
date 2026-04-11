@@ -9,7 +9,7 @@ const std::vector<std::string> validTypes = {
 	"julia"
 };
 
-#define FIXED_FRACTIONAL_BITS 22
+#define FIXED_FRACTIONAL_BITS 28
 
 #define WIDTH	512
 #define HEIGHT	512

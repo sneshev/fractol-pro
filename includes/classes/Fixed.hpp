@@ -20,6 +20,7 @@ class Fixed {
 	public:
 		Fixed();
 		Fixed(int const i);
+		Fixed(int const inRawBits, int inFractionalBitAmount);
 		Fixed(float const fl);
 		Fixed(const Fixed& fx);
 		~Fixed();

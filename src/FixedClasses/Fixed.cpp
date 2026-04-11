@@ -4,19 +4,37 @@ const int Fixed::_fractionalBitAmount = FIXED_FRACTIONAL_BITS;
 
 
 		/*		CONSTRUCTORS AND DESTRUCTORS	*/
-Fixed::Fixed() : _value(0) {
-	// std::cout << GREEN << "Fixed Default constructor called" << RESET << std::endl;
+Fixed::Fixed()
+	: _value(0)
+{
+
 }
 
-Fixed::Fixed(const Fixed& other) {
-	// std::cout << BLUE << "Fixed Copy constructor called" << RESET << std::endl;
+Fixed::Fixed(const Fixed& other) 
+	: _value(other.getRawBits())
+{
 
-	_value = other.getRawBits();
 }
 
-Fixed::Fixed(int const i) {
-	// std::cout << GREEN << "Fixed Int constructor called" << RESET << std::endl;
-	_value = i << _fractionalBitAmount;
+Fixed::Fixed(int const i)
+	: _value(i << _fractionalBitAmount)
+{
+}
+
+Fixed::Fixed(int const inRawBits, int inFractionalBitAmount)
+{
+	int diff = inFractionalBitAmount - FIXED_FRACTIONAL_BITS;
+
+	if (diff > 0) /* in > FIXED_FRACTIONAL_BITS */
+	{
+		bool negative = inRawBits < 0;
+		unsigned int abs = negative ? -inRawBits : inRawBits;
+		_value = negative ? -(int)(abs >> diff) : (int)(abs >> diff);
+	}
+	else
+	{
+		_value = inRawBits << -diff;
+	}
 }
 
 
