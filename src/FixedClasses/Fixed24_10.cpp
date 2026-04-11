@@ -1,6 +1,6 @@
 #include "Fixed24_10.hpp"
 
-const int Fixed24_10::_fractionalBitAmount = 8;
+const int Fixed24_10::_fractionalBitAmount = 16;
 
 
 		/*		CONSTRUCTORS AND DESTRUCTORS	*/
