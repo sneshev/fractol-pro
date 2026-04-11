@@ -1,6 +1,6 @@
 #include "fract.hpp"
 
-void move_center(Fractal &fract, Fixed24_10 rawX, Fixed24_10 rawY) {
+void move_center(Fractal &fract, Fixed16_16 rawX, Fixed16_16 rawY) {
 	Fixed xRangeHalf = fract.getXRangeHalf();
 	Fixed yRangeHalf = fract.getYRangeHalf();
 	

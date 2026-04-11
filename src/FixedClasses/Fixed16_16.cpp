@@ -1,77 +1,77 @@
-#include "Fixed24_10.hpp"
+#include "Fixed16_16.hpp"
 
-const int Fixed24_10::_fractionalBitAmount = 16;
+const int Fixed16_16::_fractionalBitAmount = 16;
 
 
 		/*		CONSTRUCTORS AND DESTRUCTORS	*/
-Fixed24_10::Fixed24_10() : _value(0) {
-	// std::cout << GREEN << "Fixed24_10 Default constructor called" << RESET << std::endl;
+Fixed16_16::Fixed16_16() : _value(0) {
+	// std::cout << GREEN << "Fixed16_16 Default constructor called" << RESET << std::endl;
 }
 
-Fixed24_10::Fixed24_10(const Fixed24_10& other) {
-	// std::cout << BLUE << "Fixed24_10 Copy constructor called" << RESET << std::endl;
+Fixed16_16::Fixed16_16(const Fixed16_16& other) {
+	// std::cout << BLUE << "Fixed16_16 Copy constructor called" << RESET << std::endl;
 
 	_value = other.getRawBits();
 }
 
-Fixed24_10::Fixed24_10(int const i) {
-	// std::cout << GREEN << "Fixed24_10 Int constructor called" << RESET << std::endl;
+Fixed16_16::Fixed16_16(int const i) {
+	// std::cout << GREEN << "Fixed16_16 Int constructor called" << RESET << std::endl;
 	_value = i << _fractionalBitAmount;
 }
 
 
-Fixed24_10::Fixed24_10(float const fl) {
-	// std::cout << GREEN << "Fixed24_10 Float constructor called" << RESET << std::endl;
+Fixed16_16::Fixed16_16(float const fl) {
+	// std::cout << GREEN << "Fixed16_16 Float constructor called" << RESET << std::endl;
 	_value = roundf(fl * (1 << _fractionalBitAmount));
 }
 
-Fixed24_10::~Fixed24_10() {
-	// std::cout << RED << "Fixed24_10 Destructor called" << RESET << std::endl;
+Fixed16_16::~Fixed16_16() {
+	// std::cout << RED << "Fixed16_16 Destructor called" << RESET << std::endl;
 }
 
 		/*		OPERATORS			*/
-Fixed24_10& Fixed24_10::operator=(const Fixed24_10& other) {
-	// std::cout << BLUE << "Fixed24_10 Copy assignment operator called" << RESET << std::endl;
+Fixed16_16& Fixed16_16::operator=(const Fixed16_16& other) {
+	// std::cout << BLUE << "Fixed16_16 Copy assignment operator called" << RESET << std::endl;
 	if (this != &other)
 		_value = other.getRawBits();
 	return (*this);
 }
 
-std::ostream& operator<<(std::ostream &stream, const Fixed24_10& fixed) {
+std::ostream& operator<<(std::ostream &stream, const Fixed16_16& fixed) {
 	stream << fixed.toFloat();
 	return (stream);
 }
 
-bool Fixed24_10::operator <	(const Fixed24_10 &other) const	{ return _value < other.getRawBits(); }
-bool Fixed24_10::operator >	(const Fixed24_10 &other) const	{ return _value > other.getRawBits(); }
-bool Fixed24_10::operator <=	(const Fixed24_10 &other) const	{ return _value <= other.getRawBits(); }
-bool Fixed24_10::operator >=	(const Fixed24_10 &other) const	{ return _value >= other.getRawBits(); }
-bool Fixed24_10::operator ==	(const Fixed24_10 &other) const	{ return _value == other.getRawBits(); }
-bool Fixed24_10::operator !=	(const Fixed24_10 &other) const	{ return _value != other.getRawBits(); }
+bool Fixed16_16::operator <	(const Fixed16_16 &other) const	{ return _value < other.getRawBits(); }
+bool Fixed16_16::operator >	(const Fixed16_16 &other) const	{ return _value > other.getRawBits(); }
+bool Fixed16_16::operator <=	(const Fixed16_16 &other) const	{ return _value <= other.getRawBits(); }
+bool Fixed16_16::operator >=	(const Fixed16_16 &other) const	{ return _value >= other.getRawBits(); }
+bool Fixed16_16::operator ==	(const Fixed16_16 &other) const	{ return _value == other.getRawBits(); }
+bool Fixed16_16::operator !=	(const Fixed16_16 &other) const	{ return _value != other.getRawBits(); }
 
-Fixed24_10 Fixed24_10::operator +	(const Fixed24_10 &other) const {
-	Fixed24_10 f;
+Fixed16_16 Fixed16_16::operator +	(const Fixed16_16 &other) const {
+	Fixed16_16 f;
 	long rawtotal = (long)_value + other.getRawBits();
 	f.setRawBits(rawtotal);
 	return (f);
 }
 
-Fixed24_10 Fixed24_10::operator -	(const Fixed24_10 &other) const {
-	Fixed24_10 f;
+Fixed16_16 Fixed16_16::operator -	(const Fixed16_16 &other) const {
+	Fixed16_16 f;
 	long rawtotal = (long)_value - other.getRawBits();
 	f.setRawBits(rawtotal);
 	return (f);
 }
 
-Fixed24_10 Fixed24_10::operator *	(const Fixed24_10 &other) const {
-	Fixed24_10 f;
+Fixed16_16 Fixed16_16::operator *	(const Fixed16_16 &other) const {
+	Fixed16_16 f;
 	long rawtotal = (long)_value * other.getRawBits();
 	f.setRawBits(rawtotal >> _fractionalBitAmount);
 	return (f);
 }
 
-Fixed24_10 Fixed24_10::operator /	(const Fixed24_10 &other) const {
-	Fixed24_10 f;
+Fixed16_16 Fixed16_16::operator /	(const Fixed16_16 &other) const {
+	Fixed16_16 f;
 	if (other.getRawBits() == 0)
 		throw (std::runtime_error("Division by zero"));
 	long rawtotal = ((long)_value << _fractionalBitAmount) / other.getRawBits();
@@ -79,98 +79,98 @@ Fixed24_10 Fixed24_10::operator /	(const Fixed24_10 &other) const {
 	return (f);
 }
 
-Fixed24_10 Fixed24_10::operator +	(const int i) const {
-	Fixed24_10 f;
+Fixed16_16 Fixed16_16::operator +	(const int i) const {
+	Fixed16_16 f;
 	long rawtotal = (long)_value + (i << _fractionalBitAmount);
 	f.setRawBits(rawtotal);
 	return (f);
 }
 
-Fixed24_10 Fixed24_10::operator -	(const int i) const {
-	Fixed24_10 f;
+Fixed16_16 Fixed16_16::operator -	(const int i) const {
+	Fixed16_16 f;
 	long rawtotal = (long)_value - (i << _fractionalBitAmount);
 	f.setRawBits(rawtotal);
 	return (f);
 }
 
-Fixed24_10 Fixed24_10::operator *	(const int i) const {
-	Fixed24_10 f;
+Fixed16_16 Fixed16_16::operator *	(const int i) const {
+	Fixed16_16 f;
 	long rawtotal = (long)_value * i;
 	f.setRawBits(rawtotal);
 	return (f);
 }
 
-Fixed24_10 Fixed24_10::operator /	(const int i) const {
-	Fixed24_10 f;
+Fixed16_16 Fixed16_16::operator /	(const int i) const {
+	Fixed16_16 f;
 	long rawtotal = (long)_value / i;
 	f.setRawBits(rawtotal);
 	return (f);
 }
 
 
-Fixed24_10 Fixed24_10::operator++	(int) {
-	Fixed24_10	old = (*this);
+Fixed16_16 Fixed16_16::operator++	(int) {
+	Fixed16_16	old = (*this);
 	_value++;
 	return (old);
 }
 
-Fixed24_10 Fixed24_10::operator-- (int) {
-	Fixed24_10	old = (*this);
+Fixed16_16 Fixed16_16::operator-- (int) {
+	Fixed16_16	old = (*this);
 	_value--;
 	return (old);
 }
 
-Fixed24_10& Fixed24_10::operator++ () {
+Fixed16_16& Fixed16_16::operator++ () {
 	_value++;
 	return (*this);
 }
 
-Fixed24_10& Fixed24_10::operator-- () {
+Fixed16_16& Fixed16_16::operator-- () {
 	_value--;
 	return (*this);
 }
 
 		/*		GETTER / SETTERS	*/
-int Fixed24_10::getRawBits(void) const {
+int Fixed16_16::getRawBits(void) const {
 	// std::cout << "getRawBits member function called" << std::endl;
 	return (_value);
 }
 
-void Fixed24_10::setRawBits(int const raw) {
+void Fixed16_16::setRawBits(int const raw) {
 	_value = raw;
 }
 
 		/*		OTHER FUNCTIONS		*/
-int Fixed24_10::toInt(void) const {
+int Fixed16_16::toInt(void) const {
 	return (_value >> _fractionalBitAmount);
 }
 
-float Fixed24_10::toFloat() const {
+float Fixed16_16::toFloat() const {
 	return (((float)_value / (1 << _fractionalBitAmount)));
 }
 
 
-void Fixed24_10::halfValue() {
+void Fixed16_16::halfValue() {
 	_value = _value >> 1;
 }
 
-void Fixed24_10::doubleValue() {
+void Fixed16_16::doubleValue() {
 	_value = _value << 1;
 }
 
-Fixed24_10 Fixed24_10::getHalvedValue() const {
-	Fixed24_10 f;
+Fixed16_16 Fixed16_16::getHalvedValue() const {
+	Fixed16_16 f;
 	f.setRawBits(_value >> 1);
 	return (f);
 }
 
-Fixed24_10 Fixed24_10::getDoubledValue() const {
-	Fixed24_10 f;
+Fixed16_16 Fixed16_16::getDoubledValue() const {
+	Fixed16_16 f;
 	f.setRawBits(_value << 1);
 	return (f);
 }
 
-bool Fixed24_10::isOutOfRadius(const int a, const int b) {
+bool Fixed16_16::isOutOfRadius(const int a, const int b) {
 	return (((a + b) >> (_fractionalBitAmount + 1)) < 1) ? false : true; 
 	return (((a + b) >> (_fractionalBitAmount + 1)) > 0) ? true : false; 
 }
