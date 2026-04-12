@@ -20,11 +20,10 @@ __m256i Mandelbrot::calcIterations(Vec8i cX, Vec8i cY) {
 
 	__m256i aliveMask = _mm256_set1_epi32(-1); // all pixels start alive
 	for (unsigned int count = 0; count < _maxIterations; count++) {
-		Vec8i x2=x*x;
-		Vec8i y2=y*y;
-		Vec8i newX = x2 - y2 + cX;
+		Vec8i x2=x*x, y2=y*y;
+
 		y = (x*y).shiftLeft(1) + cY;
-		x = newX;
+		x = x2 - y2 + cX;
 
 		__m256i notEscaped = _mm256_cmpgt_epi32(four.v, (x2 + y2).v);
 		aliveMask = _mm256_and_si256(aliveMask, notEscaped);
