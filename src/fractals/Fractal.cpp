@@ -42,12 +42,24 @@ void Fractal::info() {
 		default:
 			break ;
 	}
-	cout << "x min: " <<  _xMin << endl;
-	cout << "x max: " <<  _xMax << endl;
-	cout << "y min: " <<  _yMin << endl;
-	cout << "y max: " <<  _yMax << endl;
-	cout << "x range: " <<  getXRange() << endl;
-	cout << "y range: " <<  getYRange() << endl;
+	if (_precise) {
+		cout << "precise: true" << endl;
+		cout << "x min d: " <<  _xMin_d << endl;
+		cout << "x max d: " <<  _xMax_d << endl;
+		cout << "y min d: " <<  _yMin_d << endl;
+		cout << "y max d: " <<  _yMax_d << endl;
+		cout << "x range d: " <<  getXRange_d() << endl;
+		cout << "y range d: " <<  getYRange_d() << endl;
+
+	} else {
+		cout << "precise: false" << endl;
+		cout << "x min: " <<  _xMin << endl;
+		cout << "x max: " <<  _xMax << endl;
+		cout << "y min: " <<  _yMin << endl;
+		cout << "y max: " <<  _yMax << endl;
+		cout << "x range: " <<  getXRange() << endl;
+		cout << "y range: " <<  getYRange() << endl;
+	}
 	cout << "maxIterations: " << _maxIterations<< endl;
 }
 
@@ -73,8 +85,25 @@ Fixed Fractal::getYRangeHalf() const {
 	return (f);
 }
 
-bool Fractal::isPrecise() const 	{ return (_precise); }
-void Fractal::setPrecise(bool type)	{ _precise = type; }
+bool Fractal::isPrecise() const {
+	return (_precise);
+}
+
+void Fractal::setPrecise(bool type) {
+	if (type == false) {
+		_xMin = Fixed((float)_xMin_d);
+		_xMax = Fixed((float)_xMax_d);
+		_yMin = Fixed((float)_yMin_d);
+		_yMax = Fixed((float)_yMax_d);
+		_precise = false;
+	} else {
+		_xMin_d = (double)_xMin.toFloat();
+		_xMax_d = (double)_xMax.toFloat();
+		_yMin_d = (double)_yMin.toFloat();
+		_yMax_d = (double)_yMax.toFloat();
+		_precise = true;
+	}
+}
 
 
 void Fractal::setXMin(const Fixed &inX) { _xMin = inX; }

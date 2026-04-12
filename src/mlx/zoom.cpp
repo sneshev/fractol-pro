@@ -13,12 +13,7 @@ void zoom(Fractal &fract, float zoomRatio) {
 		fract.setXMax_d(centerX + newHalfRangeX);
 		fract.setYMax_d(centerY + newHalfRangeY);
 
-		// check if we zoomed out past the boundary
 		if (fract.getXRange_d() > PRECISE_RANGE) {
-			fract.setXMin(Fixed((float)fract.getXMin_d()));
-			fract.setXMax(Fixed((float)fract.getXMax_d()));
-			fract.setYMin(Fixed((float)fract.getYMin_d()));
-			fract.setYMax(Fixed((float)fract.getYMax_d()));
 			fract.setPrecise(false);
 		}
 	}
@@ -33,12 +28,7 @@ void zoom(Fractal &fract, float zoomRatio) {
 		fract.setXMax(centerX + newHalfRangeX);
 		fract.setYMax(centerY + newHalfRangeY);
 
-		// check if we zoomed in past the boundary
 		if (fract.getXRange() < Fixed(PRECISE_RANGE)) {
-			fract.setXMin_d((double)fract.getXMin().toFloat());
-			fract.setXMax_d((double)fract.getXMax().toFloat());
-			fract.setYMin_d((double)fract.getYMin().toFloat());
-			fract.setYMax_d((double)fract.getYMax().toFloat());
 			fract.setPrecise(true);
 		}
 	}

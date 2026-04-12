@@ -7,6 +7,7 @@
 #include "Vec4d.hpp"
 #include "Fractal.hpp"
 #include "Mandelbrot.hpp"
+#include "Julia.hpp"
 #include "macros.hpp"
 #include "typedefs.hpp"
 
