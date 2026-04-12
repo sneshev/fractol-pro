@@ -21,3 +21,13 @@ int main(int argc, char *argv[]) {
 	fract.mlxLoop();
 	return (EXIT_SUCCESS);
 }
+
+
+/* ideas / to do:
+	.make Julia set (duh)
+	.fix zoom and move when width/height change
+	.make iterations change automatically with zoom
+	.make the 8 32-bit Vec8i into a 4 64-bit for crazy zoom 
+	.make get8Colors and put8Pixels fully AVX2 style and optimize
+
+*/

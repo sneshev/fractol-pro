@@ -125,7 +125,6 @@ Fixed Fixed::operator /	(const int i) const {
 	return (f);
 }
 
-
 Fixed Fixed::operator++	(int) {
 	Fixed	old = (*this);
 	_value++;
