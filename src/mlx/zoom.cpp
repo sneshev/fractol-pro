@@ -19,7 +19,6 @@ void zoom(Fractal &fract, float zoomRatio) {
 			fract.setXMax(Fixed((float)fract.getXMax_d()));
 			fract.setYMin(Fixed((float)fract.getYMin_d()));
 			fract.setYMax(Fixed((float)fract.getYMax_d()));
-			cout << "precise false" << endl;
 			fract.setPrecise(false);
 		}
 	}
@@ -40,7 +39,6 @@ void zoom(Fractal &fract, float zoomRatio) {
 			fract.setXMax_d((double)fract.getXMax().toFloat());
 			fract.setYMin_d((double)fract.getYMin().toFloat());
 			fract.setYMax_d((double)fract.getYMax().toFloat());
-			cout << "precise true" << endl;
 			fract.setPrecise(true);
 		}
 	}
