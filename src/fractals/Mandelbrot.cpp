@@ -33,16 +33,24 @@ __m256i Mandelbrot::calcIterations(Vec8i cX, Vec8i cY) {
 	return (iterationCount);
 }
 
+/* dont actually need to cast to array at all eventually */
 void Mandelbrot::put8Pixels(__m256i iterations, unsigned int pixelIndex) {
     alignas(32) int32_t iterArr[8];
     _mm256_store_si256((__m256i*)iterArr, iterations);
 
+    alignas(32) int32_t colorArr[8];
+
     for (int i = 0; i < 8; i++) {
         t_v4 color = getColors(iterArr[i], _maxIterations);
-        _pixels[pixelIndex + i] = color;
+        // Reinterpret the 4-byte RGBA struct as a single int32_t
+        colorArr[i] = *reinterpret_cast<int32_t*>(&color);
     }
-}
 
+    _mm256_storeu_si256(
+		(__m256i*)(&_pixels[pixelIndex]),
+		_mm256_load_si256((__m256i*)colorArr)
+	);
+}
 void Mandelbrot::drawRow(int yStart, int yEnd) {
 	Fixed xStep = (_xMax - _xMin) / width;
 	Fixed yStep = (_yMax - _yMin) / height;
