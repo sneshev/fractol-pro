@@ -58,7 +58,7 @@ void Mandelbrot::drawRow(int yStart, int yEnd) {
 	Vec8i increment = Vec8i(xStep * 8);
 
 	Vec8i cXStart(
-		_xMin + xStep * 0,
+		_xMin,
 		_xMin + xStep * 1,
 		_xMin + xStep * 2,
 		_xMin + xStep * 3,
