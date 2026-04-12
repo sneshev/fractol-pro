@@ -28,6 +28,7 @@ int main(int argc, char *argv[]) {
 	.make more legible (esp. zoom() and move())
 	.make Julia set (duh)
 	.fix zoom and move when width/height change
+	.add mouse hooks like my other fract-ol
 	.make iterations change automatically with zoom
 	.make the 8 32-bit Vec8i into a 4 64-bit for crazy zoom 
 	.make get8Colors and put8Pixels fully AVX2 style and optimize
