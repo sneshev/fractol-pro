@@ -14,7 +14,7 @@
 class Fixed16_16 {
 	private:
 		int 				_value;
-		static const int	_fractionalBitAmount;
+		static const int	_fractionalBitAmount = 16;
 
 	public:
 		Fixed16_16();

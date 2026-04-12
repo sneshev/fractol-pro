@@ -15,7 +15,7 @@
 class Fixed {
 	private:
 		int 				_value;
-		static const int	_fractionalBitAmount;
+		static const int	_fractionalBitAmount = FIXED_FRACTIONAL_BITS;
 
 	public:
 		Fixed();

@@ -1,6 +1,6 @@
 #include "Fixed16_16.hpp"
 
-const int Fixed16_16::_fractionalBitAmount = 16;
+// const int Fixed16_16::_fractionalBitAmount = 16;
 
 
 		/*		CONSTRUCTORS AND DESTRUCTORS	*/

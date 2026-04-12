@@ -5,7 +5,7 @@
 
 class Vec8i {
 	private:
-		static const int _fractionalBitAmount;
+		static const int _fractionalBitAmount = FIXED_FRACTIONAL_BITS;
 
 	public:
 		__m256i v;
