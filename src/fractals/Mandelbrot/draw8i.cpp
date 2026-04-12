@@ -1,12 +1,7 @@
 #include "Mandelbrot.hpp"
 #include "fract.hpp"
 
-Mandelbrot::Mandelbrot(Mlx &inMlx, t_input &input) 
-	: Fractal(inMlx, input) {}
-
-Mandelbrot::~Mandelbrot() {}
-
-__m256i Mandelbrot::calcIterations(Vec8i cX, Vec8i cY) {
+__m256i Mandelbrot::calcIterations8i(Vec8i cX, Vec8i cY) {
 	static const Vec8i four(Fixed(4));
 	Vec8i x(0), y(0);
 
@@ -52,7 +47,7 @@ void Mandelbrot::put8Pixels(__m256i iterations, unsigned int pixelIndex) {
 		_mm256_load_si256((__m256i*)colorArr)
 	);
 }
-void Mandelbrot::drawRow(int yStart, int yEnd) {
+void Mandelbrot::drawRow8i(int yStart, int yEnd) {
 	Fixed xStep = (_xMax - _xMin) / width;
 	Fixed yStep = (_yMax - _yMin) / height;
 	Vec8i increment = Vec8i(xStep * 8);
@@ -72,27 +67,10 @@ void Mandelbrot::drawRow(int yStart, int yEnd) {
 		Vec8i cX = cXStart;
 		int rowOffset = y * width;
 		for (int x = 0; x < width; x += 8) {
-			__m256i iterations = calcIterations(cX, cY);
+			__m256i iterations = calcIterations8i(cX, cY);
 			unsigned int pixelIndex = rowOffset + x;
 			put8Pixels(iterations, pixelIndex);
 			cX = cX + increment;
 		}
-	}
-}
-
-void Mandelbrot::draw() {
-	int threadAmount = thread::hardware_concurrency();
-	if (!threadAmount) { threadAmount = 8; }
-
-	std::vector<thread> threads;
-	int rowsPerThread = height / threadAmount;
-
-	for (int i = 0; i < threadAmount; i++) {
-		int yStart = i * rowsPerThread;
-		int yEnd = (i == threadAmount - 1) ? height : yStart + rowsPerThread;
-		threads.emplace_back(&Mandelbrot::drawRow, this, yStart, yEnd);
-	}
-	for (thread &t: threads) {
-		t.join();
 	}
 }

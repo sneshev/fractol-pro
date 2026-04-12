@@ -7,7 +7,7 @@ MLX_PATH = MLX42
 LIBFT = https://github.com/sneshev/libft_42.git
 LIBFT_PATH = libft
 
-LIBS = -Iincludes -Iincludes/classes -L$(LIBFT_PATH) -L./MLX42/build -lmlx42 -lglfw -lGL -lm -ldl -lpthread
+LIBS = -Iincludes -Iincludes/fractals -Iincludes/FixedClasses -L$(LIBFT_PATH) -L./MLX42/build -lmlx42 -lglfw -lGL -lm -ldl -lpthread
 
 
 
