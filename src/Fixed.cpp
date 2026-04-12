@@ -5,21 +5,13 @@
 
 		/*		CONSTRUCTORS AND DESTRUCTORS	*/
 Fixed::Fixed()
-	: _value(0)
-{
-
-}
+	: _value(0) {}
 
 Fixed::Fixed(const Fixed& other) 
-	: _value(other.getRawBits())
-{
-
-}
+	: _value(other.getRawBits()) {}
 
 Fixed::Fixed(int const i)
-	: _value(i << _fractionalBitAmount)
-{
-}
+	: _value(i << _fractionalBitAmount) {}
 
 Fixed::Fixed(int const inRawBits, int inFractionalBitAmount)
 {
@@ -39,17 +31,13 @@ Fixed::Fixed(int const inRawBits, int inFractionalBitAmount)
 
 
 Fixed::Fixed(float const fl) {
-	// std::cout << GREEN << "Fixed Float constructor called" << RESET << std::endl;
 	_value = roundf(fl * (1 << _fractionalBitAmount));
 }
 
-Fixed::~Fixed() {
-	// std::cout << RED << "Fixed Destructor called" << RESET << std::endl;
-}
+Fixed::~Fixed() {}
 
 		/*		OPERATORS			*/
 Fixed& Fixed::operator=(const Fixed& other) {
-	// std::cout << BLUE << "Fixed Copy assignment operator called" << RESET << std::endl;
 	if (this != &other)
 		_value = other.getRawBits();
 	return (*this);
@@ -165,7 +153,6 @@ int Fixed::toInt(void) const {
 float Fixed::toFloat() const {
 	return (((float)_value / (1 << _fractionalBitAmount)));
 }
-
 
 void Fixed::halfValue() {
 	_value = _value >> 1;
