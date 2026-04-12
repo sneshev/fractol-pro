@@ -14,10 +14,10 @@ class Vec8i {
 		Vec8i(__m256i val);
 		Vec8i(int32_t i);
 		Vec8i(Fixed f);
-		Vec8i(Fixed f7, Fixed f6, Fixed f5, Fixed f4, Fixed f3, Fixed f2, Fixed f1, Fixed f0);
+		Vec8i(Fixed f0, Fixed f1, Fixed f2, Fixed f3, Fixed f4, Fixed f5, Fixed f6, Fixed f7);
 
 		static Vec8i set1(int value);
-		static Vec8i set(int a7, int a6, int a5, int a4, int a3, int a2, int a1, int a0);
+		static Vec8i setr(int a0, int a1, int a2, int a3, int a4, int a5, int a6, int a7);
 
 		Vec8i operator+(const Vec8i& other) const;
 		Vec8i operator-(const Vec8i& other) const;

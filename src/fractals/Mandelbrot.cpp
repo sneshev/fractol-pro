@@ -58,14 +58,14 @@ void Mandelbrot::drawRow(int yStart, int yEnd) {
 		Vec8i cY(_yMin + yStep * y);
 		int rowOffset = y * width;
 		Vec8i cX(
-			_xMin + xStep * 7,
-			_xMin + xStep * 6,
-			_xMin + xStep * 5,
-			_xMin + xStep * 4,
-			_xMin + xStep * 3,
-			_xMin + xStep * 2,
+			_xMin + xStep * 0,
 			_xMin + xStep * 1,
-			_xMin + xStep * 0
+			_xMin + xStep * 2,
+			_xMin + xStep * 3,
+			_xMin + xStep * 4,
+			_xMin + xStep * 5,
+			_xMin + xStep * 6,
+			_xMin + xStep * 7
 		);
 		for (int x = 0; x < width; x += 8) {
 			__m256i iterations = calcIterations(cX, cY);

@@ -21,16 +21,16 @@ Vec8i::Vec8i(int32_t i)
 }
 
 
-Vec8i::Vec8i(Fixed f7, Fixed f6, Fixed f5, Fixed f4, Fixed f3, Fixed f2, Fixed f1, Fixed f0)
-	: Vec8i(set(
-		f7.getRawBits(), 
-		f6.getRawBits(), 
-		f5.getRawBits(), 
-		f4.getRawBits(), 
-		f3.getRawBits(), 
-		f2.getRawBits(), 
+Vec8i::Vec8i(Fixed f0, Fixed f1, Fixed f2, Fixed f3, Fixed f4, Fixed f5, Fixed f6, Fixed f7)
+	: Vec8i(setr(
+		f0.getRawBits(),
 		f1.getRawBits(), 
-		f0.getRawBits())
+		f2.getRawBits(), 
+		f3.getRawBits(), 
+		f4.getRawBits(), 
+		f5.getRawBits(), 
+		f6.getRawBits(), 
+		f7.getRawBits()) 
 	)
 {
 
@@ -42,7 +42,7 @@ Vec8i Vec8i::set1(int value) {
 	return Vec8i(_mm256_set1_epi32(value));
 }
 
-Vec8i Vec8i::set(int a7, int a6, int a5, int a4, int a3, int a2, int a1, int a0) {
+Vec8i Vec8i::setr(int a0, int a1, int a2, int a3, int a4, int a5, int a6, int a7) {
 	return Vec8i(_mm256_setr_epi32(a0, a1, a2, a3, a4, a5, a6, a7));
 }
 
