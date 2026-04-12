@@ -57,19 +57,20 @@ void Mandelbrot::drawRow(int yStart, int yEnd) {
 	Fixed yStep = (_yMax - _yMin) / height;
 	Vec8i increment = Vec8i(xStep * 8);
 
+	Vec8i cXStart(
+		_xMin + xStep * 0,
+		_xMin + xStep * 1,
+		_xMin + xStep * 2,
+		_xMin + xStep * 3,
+		_xMin + xStep * 4,
+		_xMin + xStep * 5,
+		_xMin + xStep * 6,
+		_xMin + xStep * 7
+	);
 	for (int y = yStart; y < yEnd; y++) {
 		Vec8i cY(_yMin + yStep * y);
+		Vec8i cX = cXStart;
 		int rowOffset = y * width;
-		Vec8i cX(
-			_xMin + xStep * 0,
-			_xMin + xStep * 1,
-			_xMin + xStep * 2,
-			_xMin + xStep * 3,
-			_xMin + xStep * 4,
-			_xMin + xStep * 5,
-			_xMin + xStep * 6,
-			_xMin + xStep * 7
-		);
 		for (int x = 0; x < width; x += 8) {
 			__m256i iterations = calcIterations(cX, cY);
 			unsigned int pixelIndex = rowOffset + x;
