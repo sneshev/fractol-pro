@@ -5,8 +5,8 @@ void move_center(Fractal &fract, float rawX, float rawY) {
         Fixed xRangeHalf = fract.getXRangeHalf();
         Fixed yRangeHalf = fract.getYRangeHalf();
 
-        Fixed xRatio(rawX / width);
-        Fixed yRatio(rawY / height);
+        Fixed xRatio(rawX / WIDTH);
+        Fixed yRatio(rawY / HEIGHT);
 
         Fixed newXCenter = fract.getXMin() + (xRatio * fract.getXRange());
         Fixed newYCenter = fract.getYMin() + (yRatio * fract.getYRange());
@@ -20,8 +20,8 @@ void move_center(Fractal &fract, float rawX, float rawY) {
         double xRangeHalf = fract.getXRangeHalf_d();
         double yRangeHalf = fract.getYRangeHalf_d();
 
-        double xRatio = (rawX / width);
-        double yRatio = (rawY / height);
+        double xRatio = (rawX / WIDTH);
+        double yRatio = (rawY / HEIGHT);
 
         double newXCenter = fract.getXMin_d() + (xRatio * fract.getXRange_d());
         double newYCenter = fract.getYMin_d() + (yRatio * fract.getYRange_d());

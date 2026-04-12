@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
 	if (!isValidInput(argc, argv, input)) { return (1); }
 
 	Mlx mlx;
-	Julia fract(mlx, input);
+	Mandelbrot fract(mlx, input);
 
 	fract.info();
 	fract.draw();

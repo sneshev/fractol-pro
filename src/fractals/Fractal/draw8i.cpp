@@ -1,28 +1,4 @@
-#include "Mandelbrot.hpp"
 #include "fract.hpp"
-
-__m256i Mandelbrot::calcIterations8i(Vec8i cX, Vec8i cY) {
-	static const Vec8i four(Fixed(4));
-	Vec8i x(0), y(0);
-
-	__m256i iterationCount = _mm256_set1_epi32(0);
-	__m256i aliveMask = _mm256_set1_epi32(-1); // all pixels start alive
-	for (unsigned int count = 0; count < _maxIterations; count++) {
-		Vec8i x2=x*x, y2=y*y;
-
-		y = (x*y).shiftLeft(1) + cY;
-		x = x2 - y2 + cX;
-
-		__m256i notEscaped = _mm256_cmpgt_epi32(four.v, (x2 + y2).v);
-		aliveMask = _mm256_and_si256(aliveMask, notEscaped);
-		if (!_mm256_movemask_epi8(aliveMask))
-			break;
-
-		iterationCount = _mm256_sub_epi32(iterationCount, aliveMask);
-	}
-	return (iterationCount);
-}
-
 
 // void Mandelbrot::put8Pixels(__m256i iterations, unsigned int pixelIndex) {
     // __m256i colors = get8Colors(iterations, _maxIterations);
@@ -30,7 +6,7 @@ __m256i Mandelbrot::calcIterations8i(Vec8i cX, Vec8i cY) {
 // }
 
 /* dont actually need to cast to array at all eventually */
-void Mandelbrot::put8Pixels(__m256i iterations, unsigned int pixelIndex) {
+void Fractal::put8Pixels(__m256i iterations, unsigned int pixelIndex) {
     alignas(32) int32_t iterArr[8];
     _mm256_store_si256((__m256i*)iterArr, iterations);
 
@@ -38,7 +14,6 @@ void Mandelbrot::put8Pixels(__m256i iterations, unsigned int pixelIndex) {
 
     for (int i = 0; i < 8; i++) {
         t_v4 color = getColors(iterArr[i], _maxIterations);
-        // Reinterpret the 4-byte RGBA struct as a single int32_t
         colorArr[i] = *reinterpret_cast<int32_t*>(&color);
     }
 
@@ -47,9 +22,9 @@ void Mandelbrot::put8Pixels(__m256i iterations, unsigned int pixelIndex) {
 		_mm256_load_si256((__m256i*)colorArr)
 	);
 }
-void Mandelbrot::drawRow8i(int yStart, int yEnd) {
-	Fixed xStep = (_xMax - _xMin) / width;
-	Fixed yStep = (_yMax - _yMin) / height;
+void Fractal::drawRow8i(int yStart, int yEnd) {
+	Fixed xStep = (_xMax - _xMin) / WIDTH;
+	Fixed yStep = (_yMax - _yMin) / HEIGHT;
 	Vec8i increment = Vec8i(xStep * 8);
 
 	Vec8i cXStart(
@@ -65,8 +40,8 @@ void Mandelbrot::drawRow8i(int yStart, int yEnd) {
 	for (int y = yStart; y < yEnd; y++) {
 		Vec8i cY(_yMin + yStep * y);
 		Vec8i cX = cXStart;
-		int rowOffset = y * width;
-		for (int x = 0; x < width; x += 8) {
+		int rowOffset = y * WIDTH;
+		for (int x = 0; x < WIDTH; x += 8) {
 			__m256i iterations = calcIterations8i(cX, cY);
 			unsigned int pixelIndex = rowOffset + x;
 			put8Pixels(iterations, pixelIndex);

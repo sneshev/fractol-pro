@@ -27,6 +27,13 @@ class Fractal {
 
 		unsigned int	_maxIterations;
 
+		virtual __m256i calcIterations8i(Vec8i cX, Vec8i cY) = 0;
+		virtual __m256i calcIterations4d(Vec4d cX, Vec4d cY) = 0;
+		void drawRow8i(int yStart, int yEnd);
+		void drawRow4d(int yStart, int yEnd);
+		void put4Pixels(__m256i iterations, unsigned int pixelIndex);
+		void put8Pixels(__m256i iterations, unsigned int pixelIndex);
+
 	public:
 		Fractal(Mlx &inMlx, t_input &input);
 		~Fractal();
@@ -34,10 +41,7 @@ class Fractal {
 		void info();
 		void mlxLoop();
 
-		virtual void draw() = 0;
-		// void zoom();
-		// void move();
-		// ...
+		void draw();
 
 		mlx_t*			getMlx();
 		mlx_image_t*	getImg();
