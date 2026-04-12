@@ -36,7 +36,7 @@ class Fractal {
 
 	public:
 		Fractal(Mlx &inMlx, t_input &input);
-		~Fractal();
+		virtual ~Fractal();
 
 		void info();
 		void mlxLoop();

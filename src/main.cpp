@@ -1,9 +1,13 @@
 #include "fract.hpp"
 
-void draw_fractal(void *inFractal) {
-	Fractal *fract = (Fractal *)inFractal;
 
-	fract->draw();
+Fractal *getFractal(Mlx& mlx, t_input& input) {
+	if (input.type == FRCT_MANDELBROT)
+		return (new Mandelbrot(mlx, input));
+	else if (input.type == FRCT_JULIA)
+		return (new Julia(mlx, input));
+	else
+		exit(1);
 }
 
 int main(int argc, char *argv[]) {
@@ -11,14 +15,15 @@ int main(int argc, char *argv[]) {
 	if (!isValidInput(argc, argv, input)) { return (1); }
 
 	Mlx mlx;
-	Mandelbrot fract(mlx, input);
+	Fractal *fract = getFractal(mlx, input);
 
-	fract.info();
-	fract.draw();
+	fract->info();
+	fract->draw();
 
-	mlx_loop_hook(fract.getMlx(), mlx_keyhooks, &fract);
+	mlx_loop_hook(fract->getMlx(), mlx_keyhooks, fract);
 
-	fract.mlxLoop();
+	fract->mlxLoop();
+	delete fract;
 	return (EXIT_SUCCESS);
 }
 
