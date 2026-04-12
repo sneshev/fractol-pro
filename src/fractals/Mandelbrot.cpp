@@ -2,18 +2,13 @@
 #include "fract.hpp"
 
 Mandelbrot::Mandelbrot(Mlx &inMlx, t_input &input) 
-	: Fractal(inMlx, input)
-{
-	std::cout << GREEN << "Mandelbrot constructor called" << RESET << std::endl;
-}
+	: Fractal(inMlx, input) {}
 
-Mandelbrot::~Mandelbrot() {
-	std::cout << RED << "Mandelbrot Destructor called" << RESET << std::endl;
-}
+Mandelbrot::~Mandelbrot() {}
 
 __m256i Mandelbrot::calcIterations(Vec8i cX, Vec8i cY) {
 	static const Vec8i four(Fixed(4));
-	Vec8i x(0); Vec8i y(0);
+	Vec8i x(0), y(0);
 
 	__m256i iterationCount = _mm256_set1_epi32(0);
 	__m256i aliveMask = _mm256_set1_epi32(-1); // all pixels start alive
