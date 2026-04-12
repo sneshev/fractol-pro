@@ -33,6 +33,12 @@ __m256i Mandelbrot::calcIterations(Vec8i cX, Vec8i cY) {
 	return (iterationCount);
 }
 
+
+// void Mandelbrot::put8Pixels(__m256i iterations, unsigned int pixelIndex) {
+    // __m256i colors = get8Colors(iterations, _maxIterations);
+    // _mm256_storeu_si256((__m256i*)(&_pixels[pixelIndex]), colors);
+// }
+
 /* dont actually need to cast to array at all eventually */
 void Mandelbrot::put8Pixels(__m256i iterations, unsigned int pixelIndex) {
     alignas(32) int32_t iterArr[8];
