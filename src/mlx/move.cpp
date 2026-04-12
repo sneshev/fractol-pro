@@ -1,12 +1,12 @@
 #include "fract.hpp"
 
-void move_center(Fractal &fract, Fixed16_16 rawX, Fixed16_16 rawY) {
+void move_center(Fractal &fract, float rawX, float rawY) {
     if (!fract.isPrecise()) {
         Fixed xRangeHalf = fract.getXRangeHalf();
         Fixed yRangeHalf = fract.getYRangeHalf();
 
-        Fixed xRatio((rawX / width).getRawBits(), 16);
-        Fixed yRatio((rawY / width).getRawBits(), 16);
+        Fixed xRatio(rawX / width);
+        Fixed yRatio(rawY / height);
 
         Fixed newXCenter = fract.getXMin() + (xRatio * fract.getXRange());
         Fixed newYCenter = fract.getYMin() + (yRatio * fract.getYRange());
@@ -20,8 +20,8 @@ void move_center(Fractal &fract, Fixed16_16 rawX, Fixed16_16 rawY) {
         double xRangeHalf = fract.getXRangeHalf_d();
         double yRangeHalf = fract.getYRangeHalf_d();
 
-        double xRatio = (rawX / width).toDouble();
-        double yRatio = (rawY / width).toDouble();
+        double xRatio = (rawX / width);
+        double yRatio = (rawY / height);
 
         double newXCenter = fract.getXMin_d() + (xRatio * fract.getXRange_d());
         double newYCenter = fract.getYMin_d() + (yRatio * fract.getYRange_d());

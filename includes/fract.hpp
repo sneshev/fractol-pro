@@ -3,7 +3,6 @@
 
 #include "../MLX42/include/MLX42/MLX42.h"
 #include "Fixed.hpp"
-#include "Fixed16_16.hpp"
 #include "Vec8i.hpp"
 #include "Vec4d.hpp"
 #include "Fractal.hpp"
@@ -20,8 +19,8 @@ constexpr int height = HEIGHT - (HEIGHT % 16);
 
 // mlx
 void mlx_keyhooks(void *inFractal);
+void move_center(Fractal &fract, float rawX, float rawY);
 void zoom(Fractal &fract, float zoomRatio);
-void move_center(Fractal &fract, Fixed16_16 rawX, Fixed16_16 rawY);
 
 // parsing
 bool isValidInput(int argc, char *argv[], t_input &input);

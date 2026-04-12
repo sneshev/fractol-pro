@@ -18,16 +18,16 @@ void mlx_keyhooks(void *inFractal) {
 
 	{ /* move center */
 		if (mlx_is_key_down(mlx, MLX_KEY_UP)) {
-			move_center(fract, Fixed16_16(width / 2), Fixed16_16((height / 2 - height * MOVE_RATIO)));
+			move_center(fract, (float)(width / 2), ((float)height / 2 - (float)height * MOVE_RATIO));
 		}
 		if (mlx_is_key_down(mlx, MLX_KEY_DOWN)) {
-			move_center(fract, Fixed16_16(width / 2), Fixed16_16((height / 2 + height * MOVE_RATIO)));
+			move_center(fract, (float)(width / 2), ((float)height / 2 + (float)height * MOVE_RATIO));
 		}
 		if (mlx_is_key_down(mlx, MLX_KEY_LEFT)) {
-			move_center(fract, Fixed16_16(width / 2 - width * MOVE_RATIO), Fixed16_16(height / 2));
+			move_center(fract, ((float)width / 2 - (float)width * MOVE_RATIO), (float)(height / 2));
 			}
 		if (mlx_is_key_down(mlx, MLX_KEY_RIGHT)) {
-			move_center(fract, Fixed16_16(width / 2 + width * MOVE_RATIO), Fixed16_16(height / 2));
+			move_center(fract, ((float)width / 2 + (float)width * MOVE_RATIO), (float)(height / 2));
 		}
 	}
 

@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
 
 
 /* ideas / to do:
+	.adjust fractal bounds (when aspect ratio changes)
 	.make Julia set (duh)
 	.fix zoom and move when width/height change
 	.make iterations change automatically with zoom
