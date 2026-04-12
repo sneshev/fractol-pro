@@ -47,6 +47,6 @@ clean:
 fclean:
 	rm -rf $(MLX_PATH) $(LIBFT_PATH) $(OBJS_DIR) $(NAME)
 
-re: fclean all
+re: clean all
 
 .PHONY: all MLX libft $(OBJS_DIR) $(NAME) clean fclean

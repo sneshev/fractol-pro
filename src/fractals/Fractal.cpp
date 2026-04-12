@@ -78,6 +78,41 @@ void Fractal::setYMin(const Fixed &inY) { _yMin = inY; }
 void Fractal::setXMax(const Fixed &inX) { _xMax = inX; }
 void Fractal::setYMax(const Fixed &inY) { _yMax = inY; }
 
+bool Fractal::isPrecise() const {
+	return (_precise);
+}
+
+void Fractal::setPrecise(bool type) {
+	_precise = type;
+}
+
+FixedL Fractal::getXMinL() const        { return (_xMinL); }
+FixedL Fractal::getXMaxL() const        { return (_xMaxL); }
+FixedL Fractal::getXRangeL() const      { return (_xMaxL - _xMinL); }
+FixedL Fractal::getXCenterL() const     { return ((_xMaxL + _xMinL) / 2); }
+
+FixedL Fractal::getYMinL() const        { return (_yMinL); }
+FixedL Fractal::getYMaxL() const        { return (_yMaxL); }
+FixedL Fractal::getYCenterL() const     { return ((_yMaxL + _yMinL) / 2); }
+FixedL Fractal::getYRangeL() const      { return (_yMaxL - _yMinL); }
+
+FixedL Fractal::getXRangeHalfL() const {
+    FixedL f(_xMaxL - _xMinL);
+    f.halfValue();
+    return (f);
+}
+
+FixedL Fractal::getYRangeHalfL() const {
+    FixedL f(_yMaxL - _yMinL);
+    f.halfValue();
+    return (f);
+}
+
+void Fractal::setXMinL(const FixedL &inX) { _xMinL = inX; }
+void Fractal::setXMaxL(const FixedL &inX) { _xMaxL = inX; }
+void Fractal::setYMinL(const FixedL &inY) { _yMinL = inY; }
+void Fractal::setYMaxL(const FixedL &inY) { _yMaxL = inY; }
+
 void Fractal::adjustMaxIterations(const int i) {
 	long newValue = _maxIterations + i;
 	if (newValue < 10 || newValue > 2500) {

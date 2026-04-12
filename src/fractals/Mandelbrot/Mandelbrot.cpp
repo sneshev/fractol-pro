@@ -13,10 +13,14 @@ void Mandelbrot::draw() {
 	std::vector<thread> threads;
 	int rowsPerThread = height / threadAmount;
 
+
 	for (int i = 0; i < threadAmount; i++) {
 		int yStart = i * rowsPerThread;
 		int yEnd = (i == threadAmount - 1) ? height : yStart + rowsPerThread;
-		threads.emplace_back(&Mandelbrot::drawRow8i, this, yStart, yEnd);
+		if (_precise == false)
+			threads.emplace_back(&Mandelbrot::drawRow8i, this, yStart, yEnd);
+		else
+			threads.emplace_back(&Mandelbrot::drawRow4L, this, yStart, yEnd);
 	}
 	for (thread &t: threads) {
 		t.join();

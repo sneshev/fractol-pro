@@ -5,6 +5,7 @@
 #include "Fixed.hpp"
 #include "Fixed16_16.hpp"
 #include "Vec8i.hpp"
+#include "Vec4L.hpp"
 #include "Fractal.hpp"
 #include "Mandelbrot.hpp"
 #include "macros.hpp"
