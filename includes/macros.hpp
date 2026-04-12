@@ -11,8 +11,8 @@ const std::vector<std::string> validTypes = {
 
 #define FIXED_FRACTIONAL_BITS 28
 
-#define WIDTH	1000
-#define HEIGHT	1000
+#define WIDTH	512
+#define HEIGHT	512
 
 #define ZOOM_RATIO 0.9f
 #define MOVE_RATIO 0.03f
@@ -24,9 +24,5 @@ const std::vector<std::string> validTypes = {
 #define MAX_REAL  2.0f
 #define MIN_IMAG -2.0f
 #define MAX_IMAG  2.0f
-
-
-
-
 
 #endif
