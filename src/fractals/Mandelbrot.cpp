@@ -12,12 +12,10 @@ Mandelbrot::~Mandelbrot() {
 }
 
 __m256i Mandelbrot::calcIterations(Vec8i cX, Vec8i cY) {
-	static const __m256i one = _mm256_set1_epi32(1);
 	static const Vec8i four(Fixed(4));
-
 	Vec8i x(0); Vec8i y(0);
-	__m256i iterationCount = _mm256_set1_epi32(0);
 
+	__m256i iterationCount = _mm256_set1_epi32(0);
 	__m256i aliveMask = _mm256_set1_epi32(-1); // all pixels start alive
 	for (unsigned int count = 0; count < _maxIterations; count++) {
 		Vec8i x2=x*x, y2=y*y;
@@ -30,10 +28,7 @@ __m256i Mandelbrot::calcIterations(Vec8i cX, Vec8i cY) {
 		if (!_mm256_movemask_epi8(aliveMask))
 			break;
 
-		iterationCount = _mm256_add_epi32(
-			iterationCount,
-			_mm256_and_si256(one, aliveMask)
-		);
+		iterationCount = _mm256_sub_epi32(iterationCount, aliveMask);
 	}
 	return (iterationCount);
 }
