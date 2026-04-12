@@ -149,6 +149,9 @@ float Fixed16_16::toFloat() const {
 	return (((float)_value / (1 << _fractionalBitAmount)));
 }
 
+double Fixed16_16::toDouble() const {
+	return (((double)_value / (1 << _fractionalBitAmount)));
+}
 
 void Fixed16_16::halfValue() {
 	_value = _value >> 1;

@@ -28,6 +28,7 @@ class Fixed16_16 {
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
 		float	toFloat(void) const;
+		double	toDouble(void) const;
 		int		toInt(void) const;
 
 		bool	operator< (const Fixed16_16 &other) const;

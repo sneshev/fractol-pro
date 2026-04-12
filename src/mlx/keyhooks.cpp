@@ -11,9 +11,9 @@ void mlx_keyhooks(void *inFractal) {
 	
 	{ /* zoom in/out */
 		if (mlx_is_key_down(mlx, MLX_KEY_W))
-			zoom(fract, Fixed(ZOOM_RATIO));
+			zoom(fract, ZOOM_RATIO);
 		if (mlx_is_key_down(mlx, MLX_KEY_S))
-			zoom(fract, Fixed(1 / ZOOM_RATIO));
+			zoom(fract, 1 / ZOOM_RATIO);
 	}
 
 	{ /* move center */

@@ -10,7 +10,6 @@ const std::vector<std::string> validTypes = {
 };
 
 #define FIXED_FRACTIONAL_BITS 28
-#define FIXED_LONG_FRACTIONAL_BITS 29
 
 #define WIDTH	512
 #define HEIGHT	512

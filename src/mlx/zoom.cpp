@@ -1,45 +1,48 @@
 #include "fract.hpp"
+#define PRECISE_RANGE 0.0001f
 
-void zoom(Fractal &fract, Fixed zoomRatio) {
-	if ((fract.isPrecise() && fract.getXRangeL() > FixedL(0.5f)) ||
-		(!fract.isPrecise() && fract.getXRange() > Fixed(0.5f))) {
-		if (fract.isPrecise()) {
-			fract.setXMin(Fixed((int)fract.getXMinL().getRawBits(), FIXED_LONG_FRACTIONAL_BITS));
-			fract.setXMax(Fixed((int)fract.getXMaxL().getRawBits(), FIXED_LONG_FRACTIONAL_BITS));
-			fract.setYMin(Fixed((int)fract.getYMinL().getRawBits(), FIXED_LONG_FRACTIONAL_BITS));
-			fract.setYMax(Fixed((int)fract.getYMaxL().getRawBits(), FIXED_LONG_FRACTIONAL_BITS));
+void zoom(Fractal &fract, float zoomRatio) {
+	if (fract.isPrecise()) {
+		double centerX = fract.getXCenter_d();
+		double centerY = fract.getYCenter_d();
+		double newHalfRangeX = fract.getXRangeHalf_d() * zoomRatio;
+		double newHalfRangeY = fract.getYRangeHalf_d() * zoomRatio;
+
+		fract.setXMin_d(centerX - newHalfRangeX);
+		fract.setYMin_d(centerY - newHalfRangeY);
+		fract.setXMax_d(centerX + newHalfRangeX);
+		fract.setYMax_d(centerY + newHalfRangeY);
+
+		// check if we zoomed out past the boundary
+		if (fract.getXRange_d() > PRECISE_RANGE) {
+			fract.setXMin(Fixed((float)fract.getXMin_d()));
+			fract.setXMax(Fixed((float)fract.getXMax_d()));
+			fract.setYMin(Fixed((float)fract.getYMin_d()));
+			fract.setYMax(Fixed((float)fract.getYMax_d()));
+			cout << "precise false" << endl;
+			fract.setPrecise(false);
 		}
-		fract.setPrecise(false);
-
+	}
+	else {
 		Fixed centerX = fract.getXCenter();
 		Fixed centerY = fract.getYCenter();
-		Fixed newHalfRangeX = (fract.getXRangeHalf() * zoomRatio);
-		Fixed newHalfRangeY = (fract.getYRangeHalf() * zoomRatio);
+		Fixed newHalfRangeX = fract.getXRangeHalf() * Fixed(zoomRatio);
+		Fixed newHalfRangeY = fract.getYRangeHalf() * Fixed(zoomRatio);
 
 		fract.setXMin(centerX - newHalfRangeX);
 		fract.setYMin(centerY - newHalfRangeY);
 		fract.setXMax(centerX + newHalfRangeX);
 		fract.setYMax(centerY + newHalfRangeY);
-	}
-	else {
-		if (!fract.isPrecise()) {
-			fract.setXMinL(FixedL(fract.getXMin().getRawBits(), FIXED_FRACTIONAL_BITS));
-			fract.setXMaxL(FixedL(fract.getXMax().getRawBits(), FIXED_FRACTIONAL_BITS));
-			fract.setYMinL(FixedL(fract.getYMin().getRawBits(), FIXED_FRACTIONAL_BITS));
-			fract.setYMaxL(FixedL(fract.getYMax().getRawBits(), FIXED_FRACTIONAL_BITS));
+
+		// check if we zoomed in past the boundary
+		if (fract.getXRange() < Fixed(PRECISE_RANGE)) {
+			fract.setXMin_d((double)fract.getXMin().toFloat());
+			fract.setXMax_d((double)fract.getXMax().toFloat());
+			fract.setYMin_d((double)fract.getYMin().toFloat());
+			fract.setYMax_d((double)fract.getYMax().toFloat());
+			cout << "precise true" << endl;
+			fract.setPrecise(true);
 		}
-		fract.setPrecise(true);
-		FixedL zoomRatioL(zoomRatio.getRawBits(), FIXED_FRACTIONAL_BITS);
-
-		FixedL centerX = fract.getXCenterL();
-		FixedL centerY = fract.getYCenterL();
-		FixedL newHalfRangeX = (fract.getXRangeHalfL() * zoomRatioL);
-		FixedL newHalfRangeY = (fract.getYRangeHalfL() * zoomRatioL);
-
-		fract.setXMinL(centerX - newHalfRangeX);
-		fract.setYMinL(centerY - newHalfRangeY);
-		fract.setXMaxL(centerX + newHalfRangeX);
-		fract.setYMaxL(centerY + newHalfRangeY);
 	}
 	fract.info();
 	fract.draw();

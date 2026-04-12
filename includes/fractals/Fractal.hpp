@@ -2,9 +2,8 @@
 #define FRACTAL_HPP
 
 #include "Fixed.hpp"
-#include "FixedL.hpp"
 #include "Vec8i.hpp"
-#include "Vec4L.hpp"
+#include "Vec4d.hpp"
 #include "Mlx.hpp"
 #include "typedefs.hpp"
 #include <immintrin.h>
@@ -21,10 +20,10 @@ class Fractal {
 		Fixed			_yMax;
 
 		bool			_precise = false;
-		FixedL			_xMinL;
-		FixedL			_xMaxL;
-		FixedL			_yMinL;
-		FixedL			_yMaxL;
+		double			_xMin_d;
+		double			_xMax_d;
+		double			_yMin_d;
+		double			_yMax_d;
 
 		unsigned int	_maxIterations;
 
@@ -63,22 +62,22 @@ class Fractal {
 		bool isPrecise() const;
 		void setPrecise(bool type);
 
-		FixedL getXMinL() const;
-		FixedL getXMaxL() const;
-		FixedL getXCenterL() const;
-		FixedL getXRangeL() const;
-		FixedL getXRangeHalfL() const;
+		double getXMin_d() const;
+		double getXMax_d() const;
+		double getXCenter_d() const;
+		double getXRange_d() const;
+		double getXRangeHalf_d() const;
 
-		FixedL getYMinL() const;
-		FixedL getYMaxL() const;
-		FixedL getYCenterL() const;
-		FixedL getYRangeL() const;
-		FixedL getYRangeHalfL() const;
+		double getYMin_d() const;
+		double getYMax_d() const;
+		double getYCenter_d() const;
+		double getYRange_d() const;
+		double getYRangeHalf_d() const;
 
-		void setXMinL(const FixedL &inX);
-		void setXMaxL(const FixedL &inX);
-		void setYMinL(const FixedL &inY);
-		void setYMaxL(const FixedL &inY);
+		void setXMin_d(const double inX);
+		void setXMax_d(const double inX);
+		void setYMin_d(const double inY);
+		void setYMax_d(const double inY);
 
 		void adjustMaxIterations(const int i);
 };

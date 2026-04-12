@@ -17,19 +17,19 @@ void move_center(Fractal &fract, Fixed16_16 rawX, Fixed16_16 rawY) {
         fract.setYMax(newYCenter + yRangeHalf);
     }
     else {
-        FixedL xRangeHalf = fract.getXRangeHalfL();
-        FixedL yRangeHalf = fract.getYRangeHalfL();
+        double xRangeHalf = fract.getXRangeHalf_d();
+        double yRangeHalf = fract.getYRangeHalf_d();
 
-        FixedL xRatio((rawX / width).getRawBits(), 16);
-        FixedL yRatio((rawY / width).getRawBits(), 16);
+        double xRatio = (rawX / width).toDouble();
+        double yRatio = (rawY / width).toDouble();
 
-        FixedL newXCenter = fract.getXMinL() + (xRatio * fract.getXRangeL());
-        FixedL newYCenter = fract.getYMinL() + (yRatio * fract.getYRangeL());
+        double newXCenter = fract.getXMin_d() + (xRatio * fract.getXRange_d());
+        double newYCenter = fract.getYMin_d() + (yRatio * fract.getYRange_d());
 
-        fract.setXMinL(newXCenter - xRangeHalf);
-        fract.setXMaxL(newXCenter + xRangeHalf);
-        fract.setYMinL(newYCenter - yRangeHalf);
-        fract.setYMaxL(newYCenter + yRangeHalf);
+        fract.setXMin_d(newXCenter - xRangeHalf);
+        fract.setXMax_d(newXCenter + xRangeHalf);
+        fract.setYMin_d(newYCenter - yRangeHalf);
+        fract.setYMax_d(newYCenter + yRangeHalf);
     }
     fract.info();
     fract.draw();

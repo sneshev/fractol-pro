@@ -20,7 +20,7 @@ void Mandelbrot::draw() {
 		if (_precise == false)
 			threads.emplace_back(&Mandelbrot::drawRow8i, this, yStart, yEnd);
 		else
-			threads.emplace_back(&Mandelbrot::drawRow4L, this, yStart, yEnd);
+			threads.emplace_back(&Mandelbrot::drawRow4d, this, yStart, yEnd);
 	}
 	for (thread &t: threads) {
 		t.join();
