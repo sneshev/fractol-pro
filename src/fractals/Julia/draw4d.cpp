@@ -3,7 +3,7 @@
 
 __m256i Julia::calcIterations4d(Vec4d xStart, Vec4d yStart) {
     static const Vec4d four(4.0);
-    Vec4d x(_cX_d), y(_cY_d);
+    Vec4d x(xStart), y(yStart);
 
     __m256i iterationCount = _mm256_set1_epi64x(0);
     __m256i aliveMask = _mm256_set1_epi64x(-1);
@@ -11,8 +11,8 @@ __m256i Julia::calcIterations4d(Vec4d xStart, Vec4d yStart) {
     for (unsigned int count = 0; count < _maxIterations; count++) {
         Vec4d x2 = x*x, y2 = y*y;
 
-        y = x * y * 2.0 + yStart;
-        x = x2 - y2 + xStart;
+        y = x * y * 2.0 + _cY_d;
+        x = x2 - y2 + _cX_d;
 
         __m256d notEscaped = (x2 + y2) < four;
         aliveMask = _mm256_and_si256(aliveMask, _mm256_castpd_si256(notEscaped));

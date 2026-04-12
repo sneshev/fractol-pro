@@ -3,15 +3,15 @@
 
 __m256i Julia::calcIterations8i(Vec8i xStart, Vec8i yStart) {
 	static const Vec8i four(Fixed(4));
-	Vec8i x(_cX), y(_cY);
+	Vec8i x(xStart), y(yStart);
 
 	__m256i iterationCount = _mm256_set1_epi32(0);
 	__m256i aliveMask = _mm256_set1_epi32(-1);
 	for (unsigned int count = 0; count < _maxIterations; count++) {
 		Vec8i x2=x*x, y2=y*y;
 
-		y = (x*y).shiftLeft(1) + yStart;
-		x = x2 - y2 + xStart;
+		y = (x*y).shiftLeft(1) + _cY;
+		x = x2 - y2 + _cX;
 
 		__m256i notEscaped = _mm256_cmpgt_epi32(four.v, (x2 + y2).v);
 		aliveMask = _mm256_and_si256(aliveMask, notEscaped);
