@@ -1,15 +1,6 @@
 #include "Julia.hpp"
 #include "fract.hpp"
 
-Julia::Julia(Mlx &inMlx, t_input &input) 
-	: Fractal(inMlx, input),
-	_cX(input.args[0]),
-	_cY(input.args[1]),
-	_cX_d(input.args[0]),
-	_cY_d(input.args[1]) {}
-
-Julia::~Julia() {}
-
 __m256i Julia::calcIterations8i(Vec8i xStart, Vec8i yStart) {
 	static const Vec8i four(Fixed(4));
 	Vec8i x(xStart), y(yStart);

@@ -22,6 +22,7 @@ constexpr int HEIGHT = HEIGHT_RAW - (HEIGHT_RAW % 16);
 void mlx_keyhooks(void *inFractal);
 void move_center(Fractal &fract, float rawX, float rawY);
 void zoom(Fractal &fract, float zoomRatio);
+void juliaAdjustC(Julia* fract, keys_t key);
 
 // parsing
 bool isValidInput(int argc, char *argv[], t_input &input);

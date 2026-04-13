@@ -1,4 +1,5 @@
 #include "fract.hpp"
+void juliaAdjustC(Julia* fract, keys_t key);
 
 void mlx_keyhooks(void *inFractal) {
 	Fractal &fract = *(Fractal *)inFractal;
@@ -36,5 +37,27 @@ void mlx_keyhooks(void *inFractal) {
 			fract.adjustMaxIterations(-ITERATION_RATIO);
 		if (mlx_is_key_down(mlx, MLX_KEY_PERIOD))
 			fract.adjustMaxIterations(ITERATION_RATIO);
+	}
+
+	{ /* julia change c */
+		if (fract.getType() == FRCT_JULIA) {
+			if (mlx_is_key_down(mlx, MLX_KEY_Q)) {
+				juliaAdjustC(static_cast<Julia*>(&fract), MLX_KEY_Q);
+			}
+			if (mlx_is_key_down(mlx, MLX_KEY_A)) {
+				juliaAdjustC(static_cast<Julia*>(&fract), MLX_KEY_A);
+			
+			}
+			if (mlx_is_key_down(mlx, MLX_KEY_E)) {
+				juliaAdjustC(static_cast<Julia*>(&fract), MLX_KEY_E);
+			
+			}
+			if (mlx_is_key_down(mlx, MLX_KEY_D)) {
+				juliaAdjustC(static_cast<Julia*>(&fract), MLX_KEY_D);
+			
+			}
+
+		}
+
 	}
 }

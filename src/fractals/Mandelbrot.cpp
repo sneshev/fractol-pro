@@ -1,10 +1,5 @@
 #include "fract.hpp"
 
-Mandelbrot::Mandelbrot(Mlx &inMlx, t_input &input) 
-	: Fractal(inMlx, input) {}
-
-Mandelbrot::~Mandelbrot() {}
-
 __m256i Mandelbrot::calcIterations8i(Vec8i cX, Vec8i cY) {
 	static const Vec8i four(Fixed(4));
 	Vec8i x(0), y(0);

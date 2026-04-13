@@ -22,6 +22,10 @@ void Fractal::mlxLoop() {
 	_mlx.loop();
 }
 
+e_fract_type Fractal::getType() {
+	return (_type);
+}
+
 mlx_t* Fractal::getMlx() {
 	return (_mlx.getMlx());
 }

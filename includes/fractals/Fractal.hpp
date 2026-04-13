@@ -43,8 +43,9 @@ class Fractal {
 
 		void draw();
 
-		mlx_t*			getMlx();
+		e_fract_type	getType();
 		mlx_image_t*	getImg();
+		mlx_t*			getMlx();
 
 		Fixed getXMin() const;
 		Fixed getXMax() const;
@@ -64,7 +65,7 @@ class Fractal {
 		void setYMax(const Fixed &inY);
 
 		bool isPrecise() const;
-		void setPrecise(bool type);
+		virtual void setPrecise(bool type);
 
 		double getXMin_d() const;
 		double getXMax_d() const;

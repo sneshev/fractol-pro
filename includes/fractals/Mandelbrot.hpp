@@ -10,8 +10,10 @@ class Mandelbrot : public Fractal {
 		__m256i calcIterations4d(Vec4d cX, Vec4d cY) override;
 
 	public:
-		Mandelbrot(Mlx &inMlx, t_input &input);
-		~Mandelbrot();
+		Mandelbrot(Mlx &inMlx, t_input &input) 
+			: Fractal(inMlx, input) {}
+
+		~Mandelbrot() {}
 };
 
 #endif
