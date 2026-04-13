@@ -30,6 +30,7 @@ int main(int argc, char *argv[]) {
 
 /* ideas / to do:
 	.adjust fractal bounds (when aspect ratio changes)
+	.make keyhooks more chill but if you hold shift be fast 
 	.make more legible (esp. zoom() and move())
 	.make Julia set (duh)
 	.fix zoom and move when width/height change
