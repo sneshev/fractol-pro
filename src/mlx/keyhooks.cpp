@@ -46,18 +46,13 @@ void mlx_keyhooks(void *inFractal) {
 			}
 			if (mlx_is_key_down(mlx, MLX_KEY_A)) {
 				juliaAdjustC(static_cast<Julia*>(&fract), MLX_KEY_A);
-			
 			}
 			if (mlx_is_key_down(mlx, MLX_KEY_E)) {
 				juliaAdjustC(static_cast<Julia*>(&fract), MLX_KEY_E);
-			
 			}
 			if (mlx_is_key_down(mlx, MLX_KEY_D)) {
 				juliaAdjustC(static_cast<Julia*>(&fract), MLX_KEY_D);
-			
 			}
-
 		}
-
 	}
 }

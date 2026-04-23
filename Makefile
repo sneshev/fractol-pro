@@ -1,13 +1,13 @@
 NAME = fractol
-CC = gcc -g #-Wall -Wextra -Werror 
-CPP = c++ -g -O3 -mavx2 #-Wall -Wextra -Werror
+CC = gcc #-Wall -Wextra -Werror 
+CPP = c++ -O3 -mavx2 #-Wall -Wextra -Werror
 
 MLX = https://github.com/codam-coding-college/MLX42.git
 MLX_PATH = MLX42
 LIBFT = https://github.com/sneshev/libft_42.git
 LIBFT_PATH = libft
 
-LIBS = -Iincludes -Iincludes/fractals -Iincludes/FixedClasses -L$(LIBFT_PATH) -L./MLX42/build -lmlx42 -lglfw -lGL -lm -ldl -lpthread
+INC = -Iincludes -Iincludes/fractals -Iincludes/FixedClasses -L$(LIBFT_PATH) -L./MLX42/build -lmlx42 -lglfw -lGL -lm -ldl -lpthread
 
 
 
@@ -32,14 +32,14 @@ OBJS := $(OBJS:src/%.cpp=$(OBJS_DIR)/%.o)
 
 $(OBJS_DIR)/%.o: src/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(LIBS) -c $< -o $@
+	$(CC) $(INC) -c $< -o $@
 
 $(OBJS_DIR)/%.o: src/%.cpp
 	@mkdir -p $(dir $@)
-	$(CPP) $(LIBS) -c $< -o $@
+	$(CPP) $(INC) -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CPP) $(OBJS) $(LIBS) -o $(NAME)
+	$(CPP) $(OBJS) $(INC) -o $(NAME)
 
 clean:
 	rm -rf $(OBJS_DIR) $(NAME)

@@ -11,8 +11,8 @@ const std::vector<std::string> validTypes = {
 
 #define FIXED_FRACTIONAL_BITS 28
 
-#define WIDTH_RAW	1024
-#define HEIGHT_RAW	1024
+#define WIDTH_RAW	750
+#define HEIGHT_RAW	750
 
 #define ZOOM_RATIO 0.9f
 #define MOVE_RATIO 0.03f
