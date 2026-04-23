@@ -1,6 +1,6 @@
 NAME = fractol
-CC = gcc -g -Wall -Wextra -Werror 
-CPP = c++ -g -Wall -Wextra -Werror -O3 -mavx2
+CC = gcc -g #-Wall -Wextra -Werror 
+CPP = c++ -g -O3 -mavx2 #-Wall -Wextra -Werror
 
 MLX = https://github.com/codam-coding-college/MLX42.git
 MLX_PATH = MLX42
